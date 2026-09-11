@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ساعت تهران</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+            color: white;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        .clock {
+            text-align: center;
+        }
+
+        #time {
+            font-size: 70px;
+            font-weight: bold;
+            direction: ltr;
+        }
+
+        #date {
+            margin-top: 15px;
+            font-size: 22px;
+            color: #bbb;
+        }
+
+        .city {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clock">
+        <div class="city">تهران</div>
+
+        <div id="time">00:00:00</div>
+
+        <div id="date">در حال بارگذاری...</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+
+            // تبدیل زمان سیستم به زمان تهران
+            const tehranTime = new Date(
+                now.toLocaleString("en-US", {
+                    timeZone: "Asia/Tehran"
+                })
+            );
+
+            let hours = tehranTime.getHours();
+            let minutes = tehranTime.getMinutes();
+            let seconds = tehranTime.getSeconds();
+
+            hours = String(hours).padStart(2, "0");
+            minutes = String(minutes).padStart(2, "0");
+            seconds = String(seconds).padStart(2, "0");
+
+            document.getElementById("time").textContent =
+                `${hours}:${minutes}:${seconds}`;
+
+            // تاریخ شمسی
+            const date = new Intl.DateTimeFormat("fa-IR", {
+                timeZone: "Asia/Tehran",
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }).format(now);
+
+            document.getElementById("date").textContent = date;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+
+</body>
+</html>
