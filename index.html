@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>یه سورپرایز برای نازنین 🎁</title>
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:Tahoma,Arial,sans-serif;
+    background:
+        radial-gradient(circle at 50% 20%,#4b126b,#15001f 55%,#050008);
+    color:white;
+}
+/* ---------- صفحه اول ---------- */
+#intro{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:20;
+    transition:1s;
+}
+.gift{
+    font-size:85px;
+    animation:float 2s infinite;
+}
+#intro h1{
+    margin-top:20px;
+    font-size:28px;
+}
+#intro p{
+    margin:15px 0 30px;
+    color:#ccc;
+}
+button{
+    border:none;
+    padding:15px 38px;
+    border-radius:50px;
+    font-size:18px;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff1493,#8a2be2);
+    box-shadow:0 0 30px #ff1493;
+    transition:.3s;
+}
+button:hover{
+    transform:scale(1.08);
+}
+/* ---------- شمارش ---------- */
+#countdown{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:15;
+    background:#09000d;
+}
+#number{
+    font-size:150px;
+    font-weight:bold;
+    color:#fff;
+    text-shadow:
+        0 0 20px #ff1493,
+        0 0 50px #ff1493,
+        0 0 100px #8a2be2;
+}
+.countAnimation{
+    animation:count .9s ease;
+}
+@keyframes count{
+    0%{
+        transform:scale(.2);
+        opacity:0;
+    }
+    50%{
+        transform:scale(1.3);
+        opacity:1;
+    }
+    100%{
+        transform:scale(1);
+        opacity:0;
+    }
+}
+/* ---------- صفحه اصلی ---------- */
+#main{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    opacity:0;
+    visibility:hidden;
+    transition:1.5s;
+}
+.card{
+    width:min(92%,620px);
+    padding:40px 25px;
+    text-align:center;
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 0 60px rgba(255,0,170,.25);
+}
+.cake{
+    font-size:85px;
+    animation:bounce 2s infinite;
+}
+h2{
+    margin:15px 0;
+    font-size:38px;
+    background:
+        linear-gradient(
+            90deg,
+            #ff69c9,
+            #fff,
+            #ff69c9
+        );
+    background-size:200%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:shine 3s infinite;
+}
+.message{
+    font-size:17px;
+    line-height:2.3;
+    color:#eee;
+}
+.highlight{
+    color:#ff69c9;
+    font-weight:bold;
+}
+.signature{
+    margin-top:25px;
+    color:#aaa;
+}
+/* ---------- قلب‌ها ---------- */
+.heart{
+    position:fixed;
+    bottom:-40px;
+    pointer-events:none;
+    animation:rise linear forwards;
+}
+@keyframes rise{
+    to{
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+        opacity:0;
+    }
+}
+/* ---------- کنفتی ---------- */
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-20px;
+    pointer-events:none;
+    animation:fall linear forwards;
+}
+@keyframes fall{
+    to{
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+        opacity:0;
+    }
+}
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+@keyframes shine{
+    0%{
+        background-position:0%;
+    }
+    100%{
+        background-position:200%;
+    }
+}
+/* موبایل */
+@media(max-width:500px){
+    #intro h1{
+        font-size:23px;
+    }
+    #number{
+        font-size:110px;
+    }
+    h2{
+        font-size:30px;
+    }
+    .message{
+        font-size:15px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- ========================= -->
+<!-- صفحه شروع -->
+<!-- ========================= -->
+<div id="intro">
+    <div class="gift">
+        🎁
+    </div>
+    <h1>
+        نازنین... یه چیزی برات آماده شده 👀
+    </h1>
+    <p>
+        آماده‌ای سورپرایزت رو ببینی؟
+    </p>
+    <button onclick="startSurprise()">
+        بزن بریم ✨
+    </button>
+</div>
+<!-- ========================= -->
+<!-- شمارش معکوس -->
+<!-- ========================= -->
+<div id="countdown">
+    <div id="number">
+        3
+    </div>
+</div>
+<!-- ========================= -->
+<!-- صفحه تولد -->
+<!-- ========================= -->
+<div id="main">
+    <div class="card">
+        <div class="cake">
+            🎂
+        </div>
+        <h2>
+            تولدت مبارک نازنین! 🎉
+        </h2>
+        <div class="message">
+            امروز یه روز معمولی نیست...
+            <br>
+            چون امروز روزیه که
+            <span class="highlight">
+                تو
+            </span>
+            به دنیا اومدی ❤️
+            <br><br>
+            امیدوارم سال جدید زندگیت پر باشه از:
+            <br>
+            ✨ اتفاق‌های قشنگ
+            <br>
+            😂 خنده‌های زیاد
+            <br>
+            ❤️ آدم‌های دوست‌داشتنی
+            <br>
+            🌟 کلی خاطره‌ی فراموش‌نشدنی
+            <br><br>
+            و از همه مهم‌تر...
+            <br>
+            <span class="highlight">
+                همیشه دلت خوش باشه ❤️
+            </span>
+        </div>
+        <div class="signature">
+            این سورپرایز فقط برای تو ساخته شده ✨
+        </div>
+    </div>
+</div>
+<script>
+/* شروع سورپرایز */
+function startSurprise(){
+    /* مخفی کردن صفحه اول */
+    const intro =
+        document.getElementById("intro");
+    intro.style.opacity="0";
+    intro.style.pointerEvents="none";
+    setTimeout(()=>{
+        intro.style.display="none";
+        startCountdown();
+    },700);
+}
+/* شمارش معکوس */
+function startCountdown(){
+    const countdown =
+        document.getElementById("countdown");
+    const number =
+        document.getElementById("number");
+    countdown.style.display="flex";
+    let count = 3;
+    number.innerText=count;
+    function nextNumber(){
+        number.classList.remove("countAnimation");
+        void number.offsetWidth;
+        number.classList.add("countAnimation");
+        if(count > 1){
+            count--;
+            setTimeout(()=>{
+                number.innerText=count;
+                nextNumber();
+            },1000);
+        }else{
+            setTimeout(()=>{
+                number.innerText="🎉";
+                explode();
+                setTimeout(showMain,800);
+            },1000);
+        }
+    }
+    nextNumber();
+}
+/* نمایش صفحه اصلی */
+function showMain(){
+    document.getElementById("countdown")
+        .style.display="none";
+    const main =
+        document.getElementById("main");
+    main.style.visibility="visible";
+    main.style.opacity="1";
+    startHearts();
+}
+/* انفجار */
+function explode(){
+    /* کنفتی */
+    for(let i=0;i<180;i++){
+        const c =
+            document.createElement("div");
+        c.className="confetti";
+        c.style.left =
+            Math.random()*100+"vw";
+        c.style.animationDuration =
+            (2+Math.random()*4)+"s";
+        c.style.background =
+            `hsl(${Math.random()*360},100%,65%)`;
+        c.style.width =
+            (5+Math.random()*10)+"px";
+        c.style.height =
+            (5+Math.random()*10)+"px";
+        document.body.appendChild(c);
+        setTimeout(()=>{
+            c.remove();
+        },6000);
+    }
+    /* قلب‌های زیاد */
+    for(let i=0;i<60;i++){
+        const heart =
+            document.createElement("div");
+        heart.className="heart";
+        const list=[
+            "❤️",
+            "💖",
+            "💗",
+            "💜",
+            "💕",
+            "✨"
+        ];
+        heart.innerText =
+            list[Math.floor(Math.random()*list.length)];
+        heart.style.left =
+            Math.random()*100+"vw";
+        heart.style.fontSize =
+            (15+Math.random()*30)+"px";
+        heart.style.animationDuration =
+            (3+Math.random()*5)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>{
+            heart.remove();
+        },8000);
+    }
+}
+/* قلب‌های دائمی */
+function startHearts(){
+    setInterval(()=>{
+        const heart =
+            document.createElement("div");
+        heart.className="heart";
+        const list=[
+            "❤️",
+            "💖",
+            "💗",
+            "💕",
+            "✨"
+        ];
+        heart.innerText =
+            list[Math.floor(Math.random()*list.length)];
+        heart.style.left =
+            Math.random()*100+"vw";
+        heart.style.fontSize =
+            (15+Math.random()*25)+"px";
+        heart.style.animationDuration =
+            (4+Math.random()*5)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>{
+            heart.remove();
+        },9000);
+    },350);
+}
+</script>
+</body>
+</html>
