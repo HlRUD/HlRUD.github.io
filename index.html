@@ -1,302 +1,47 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+<title>My Website</title>
 
-    <title>SMS Manager</title>
+<style>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Tahoma, Arial, sans-serif;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            background: #0b0b0f;
-            color: white;
-            min-height: 100vh;
-        }
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #eeeeee;
+}
 
-        .header {
-            background: #111118;
-            border-bottom: 1px solid #252532;
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.website {
+    position: relative;
+    width: 900px;
+    height: 600px;
+    margin: 30px auto;
+    background: #ffffff;
+    overflow: hidden;
+}
 
-        .logo {
-            font-size: 21px;
-            font-weight: bold;
-        }
+button {
+    cursor: pointer;
+}
 
-        .status {
-            font-size: 12px;
-            color: #777;
-        }
+</style>
 
-        .container {
-            max-width: 700px;
-            margin: auto;
-            padding: 25px 15px;
-        }
-
-        .welcome {
-            background: #13131b;
-            border: 1px solid #252532;
-            border-radius: 18px;
-            padding: 25px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .welcome h1 {
-            font-size: 25px;
-            margin-bottom: 12px;
-        }
-
-        .welcome p {
-            color: #999;
-            line-height: 1.8;
-            font-size: 14px;
-        }
-
-        .permission {
-            background: #15151e;
-            border: 1px solid #292936;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .permission h2 {
-            font-size: 17px;
-            margin-bottom: 10px;
-        }
-
-        .permission p {
-            color: #999;
-            font-size: 13px;
-            line-height: 1.8;
-            margin-bottom: 18px;
-        }
-
-        .button {
-            width: 100%;
-            border: none;
-            border-radius: 12px;
-            padding: 14px;
-            background: white;
-            color: #111;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .button:active {
-            transform: scale(0.98);
-        }
-
-        .sms-list {
-            display: none;
-        }
-
-        .sms-list h2 {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .sms {
-            background: #13131b;
-            border: 1px solid #252532;
-            border-radius: 15px;
-            padding: 16px;
-            margin-bottom: 10px;
-        }
-
-        .sms-top {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .sender {
-            font-weight: bold;
-        }
-
-        .time {
-            color: #777;
-            font-size: 11px;
-        }
-
-        .message {
-            color: #bbb;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .empty {
-            text-align: center;
-            color: #666;
-            padding: 35px 10px;
-        }
-
-        .footer {
-            text-align: center;
-            color: #555;
-            font-size: 11px;
-            padding: 30px 0;
-        }
-    </style>
 </head>
 
 <body>
 
-    <header class="header">
-        <div class="logo">SMS Manager</div>
-        <div class="status" id="status">آماده</div>
-    </header>
+<div class="website">
 
-    <main class="container">
+<a href="https://splus.ir/ShirandKhurshidteam" style="position:absolute;left:90px;top:149px;width:180px;height:45px;font-size:16px;color:#ff0000;">جهت سيک کردن به جنده خونه امير حسين چيز ببخشيد گپ امير حسين لمس کونيد</a>
 
-        <section class="welcome">
-            <h1>مدیریت پیامک‌ها</h1>
-            <p>
-                برای استفاده از امکانات برنامه، ابتدا دسترسی موردنیاز
-                را از طریق برنامه اندروید تأیید کنید.
-            </p>
-        </section>
-
-        <section class="permission" id="permissionBox">
-
-            <h2>دسترسی به پیامک‌ها</h2>
-
-            <p>
-                این صفحه به‌تنهایی امکان دسترسی به SMS گوشی را ندارد.
-                در نسخه APK، درخواست مجوز توسط بخش اندروید برنامه
-                نمایش داده می‌شود.
-            </p>
-
-            <button class="button" onclick="requestSMSPermission()">
-                درخواست دسترسی
-            </button>
-
-        </section>
-
-        <section class="sms-list" id="smsList">
-
-            <h2>پیامک‌ها</h2>
-
-            <div id="messages">
-                <div class="empty">
-                    هنوز پیامکی برای نمایش وجود ندارد.
-                </div>
-            </div>
-
-        </section>
-
-        <div class="footer">
-            SMS Manager
-        </div>
-
-    </main>
-
-    <script>
-
-        function requestSMSPermission() {
-
-            /*
-             * این قسمت فقط یک Bridge برای APK است.
-             *
-             * HTML/Chrome به تنهایی نمی‌تواند READ_SMS را درخواست کند.
-             * وقتی این صفحه داخل WebView اپ خودت اجرا شود،
-             * می‌توان این تابع را به کد Native اندروید متصل کرد.
-             */
-
-            if (
-                window.Android &&
-                typeof window.Android.requestSMSPermission === "function"
-            ) {
-
-                window.Android.requestSMSPermission();
-
-            } else {
-
-                document.getElementById("status").textContent =
-                    "نسخه وب";
-
-                alert(
-                    "درخواست READ_SMS باید توسط نسخه APK انجام شود."
-                );
-            }
-        }
-
-
-        /*
-         * این تابع می‌تواند توسط بخش Native APK
-         * برای نمایش پیامک‌های مجاز استفاده شود.
-         *
-         * مثال:
-         *
-         * showSMS("09120000000", "پیام آزمایشی", "17:30");
-         */
-
-        function showSMS(sender, message, time) {
-
-            const list = document.getElementById("messages");
-
-            const empty = list.querySelector(".empty");
-
-            if (empty) {
-                empty.remove();
-            }
-
-            const item = document.createElement("div");
-
-            item.className = "sms";
-
-            item.innerHTML = `
-                <div class="sms-top">
-                    <span class="sender"></span>
-                    <span class="time"></span>
-                </div>
-
-                <div class="message"></div>
-            `;
-
-            item.querySelector(".sender").textContent = sender;
-            item.querySelector(".time").textContent = time;
-            item.querySelector(".message").textContent = message;
-
-            list.appendChild(item);
-
-            document.getElementById("smsList").style.display = "block";
-            document.getElementById("status").textContent = "فعال";
-        }
-
-
-        /*
-         * وقتی Native اندروید مجوز را تأیید کرد،
-         * می‌تواند این تابع را صدا بزند.
-         */
-
-        function permissionGranted() {
-
-            document.getElementById("status").textContent =
-                "دسترسی تأیید شد";
-
-            document.getElementById("permissionBox").style.display =
-                "none";
-
-            document.getElementById("smsList").style.display =
-                "block";
-        }
-
-    </script>
+</div>
 
 </body>
 </html>
