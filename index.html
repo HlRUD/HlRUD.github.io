@@ -1,424 +1,267 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نود شاپور | فروشگاه</title>
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Tahoma,Arial,sans-serif;
-}
-body{
-    background:#070707;
-    color:#fff;
-}
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(10,10,10,.94);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #222;
-    padding:18px 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-.logo{
-    font-size:25px;
-    font-weight:bold;
-}
-.logo span{
-    color:#00ff88;
-}
-nav{
-    display:flex;
-    gap:10px;
-}
-nav button{
-    background:#151515;
-    border:1px solid #292929;
-    color:#fff;
-    padding:10px 15px;
-    border-radius:10px;
-    cursor:pointer;
-}
-nav button:hover{
-    border-color:#00ff88;
-    color:#00ff88;
-}
-.hero{
-    min-height:360px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:50px 20px;
-    background:
-    radial-gradient(circle at center,#063d27 0,#07130e 35%,#070707 70%);
-}
-.hero h1{
-    font-size:48px;
-    margin-bottom:15px;
-}
-.hero h1 span{
-    color:#00ff88;
-}
-.hero p{
-    color:#aaa;
-    font-size:17px;
-}
-.shop{
-    max-width:1200px;
-    margin:auto;
-    padding:45px 20px;
-}
-.section-title{
-    text-align:center;
-    margin-bottom:30px;
-}
-.section-title h2{
-    font-size:30px;
-}
-.section-title p{
-    color:#777;
-    margin-top:8px;
-}
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:20px;
-}
-.product{
-    background:#111;
-    border:1px solid #242424;
-    border-radius:18px;
-    padding:20px;
-    transition:.25s;
-}
-.product:hover{
-    transform:translateY(-6px);
-    border-color:#00ff88;
-    box-shadow:0 10px 35px rgba(0,255,136,.12);
-}
-.product-img{
-    height:150px;
-    border-radius:13px;
-    background:linear-gradient(135deg,#123c2b,#101010);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:55px;
-    margin-bottom:18px;
-}
-.product h3{
-    margin-bottom:10px;
-}
-.product p{
-    color:#888;
-    font-size:14px;
-    line-height:1.7;
-    min-height:45px;
-}
-.price{
-    color:#00ff88;
-    font-size:20px;
-    font-weight:bold;
-    margin:17px 0;
-}
-.buy{
-    width:100%;
-    border:0;
-    padding:12px;
-    border-radius:10px;
-    background:#00ff88;
-    color:#001b0e;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:15px;
-}
-.buy:hover{
-    background:#00d875;
-}
-.panel{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.75);
-    z-index:200;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-.box{
-    width:100%;
-    max-width:450px;
-    background:#111;
-    border:1px solid #292929;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 20px 70px #000;
-}
-.box h2{
-    margin-bottom:20px;
-}
-.box input{
-    width:100%;
-    padding:13px;
-    margin-bottom:12px;
-    background:#080808;
-    color:#fff;
-    border:1px solid #292929;
-    border-radius:10px;
-    outline:none;
-}
-.box input:focus{
-    border-color:#00ff88;
-}
-.close{
-    float:left;
-    background:#222;
-    color:#fff;
-    border:0;
-    padding:8px 12px;
-    border-radius:8px;
-    cursor:pointer;
-}
-.cart-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:13px 0;
-    border-bottom:1px solid #252525;
-}
-.cart-item button{
-    background:#ff3d3d;
-    color:white;
-    border:0;
-    border-radius:7px;
-    padding:6px 9px;
-    cursor:pointer;
-}
-.total{
-    margin-top:20px;
-    font-size:20px;
-    color:#00ff88;
-    font-weight:bold;
-}
-.checkout{
-    width:100%;
-    margin-top:15px;
-    padding:13px;
-    border:0;
-    border-radius:10px;
-    background:#00ff88;
-    font-weight:bold;
-    cursor:pointer;
-}
-footer{
-    text-align:center;
-    padding:40px;
-    color:#555;
-    border-top:1px solid #181818;
-}
-@media(max-width:600px){
-    header{
-        padding:15px;
-    }
-    .hero h1{
-        font-size:35px;
-    }
-    nav button{
-        padding:8px 10px;
-        font-size:12px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم نوبت‌دهی اتاق</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+        body {
+            background: #0b0f14;
+            color: #fff;
+            min-height: 100vh;
+        }
+        header {
+            background: #111820;
+            border-bottom: 1px solid #26313d;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #00e5ff;
+        }
+        .status {
+            color: #00ff88;
+            font-size: 14px;
+        }
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+        .welcome {
+            margin-bottom: 30px;
+        }
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .welcome p {
+            color: #8995a3;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #111820;
+            border: 1px solid #26313d;
+            border-radius: 14px;
+            padding: 22px;
+        }
+        .card-title {
+            color: #8995a3;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .card-number {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .booking-box {
+            background: #111820;
+            border: 1px solid #26313d;
+            border-radius: 16px;
+            padding: 25px;
+        }
+        .booking-box h2 {
+            margin-bottom: 20px;
+        }
+        .date-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .date {
+            min-width: 90px;
+            padding: 12px;
+            text-align: center;
+            background: #18212b;
+            border: 1px solid #2a3744;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .date:hover,
+        .date.active {
+            background: #00e5ff;
+            color: #001014;
+        }
+        .date small {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .times {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .time {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #26313d;
+            background: #151d26;
+        }
+        .time.available:hover {
+            border-color: #00e5ff;
+            transform: translateY(-2px);
+        }
+        .time.booked {
+            background: #32191d;
+            border-color: #713038;
+            color: #ff6b78;
+            cursor: not-allowed;
+        }
+        .time.selected {
+            background: #003f48;
+            border-color: #00e5ff;
+            color: #00e5ff;
+        }
+        .reserve-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #00e5ff;
+            color: #001014;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .reserve-btn:hover {
+            background: #39edff;
+        }
+        .info {
+            margin-top: 20px;
+            color: #8995a3;
+            font-size: 13px;
+            text-align: center;
+        }
+        @media (max-width: 700px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            .times {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .welcome h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
 <header>
     <div class="logo">
-        نود <span>شاپور</span>
+        ROOM<span>BOOK</span>
     </div>
-<nav>
-    <button onclick="openPanel('cart')">
-        🛒 سبد خرید (<span id="cartCount">0</span>)
-    </button>
-    <button onclick="openPanel('user')">
-        👤 پنل کاربری
-    </button>
-</nav>
+    <div class="status">
+        ● سیستم آنلاین
+    </div>
 </header>
-<section class="hero">
-    <div>
-        <h1>به <span>نود شاپور</span> خوش آمدید</h1>
-        <p>فروشگاه مدرن و سریع شما</p>
+<div class="container">
+    <div class="welcome">
+        <h1>سیستم نوبت‌دهی اتاق</h1>
+        <p>زمان موردنظر خود را انتخاب کنید و اتاق را رزرو کنید.</p>
     </div>
-</section>
-<section class="shop">
-<div class="section-title">
-    <h2>محصولات</h2>
-    <p>محصول موردنظر خود را انتخاب کنید</p>
-</div>
-<div class="products">
-    <div class="product">
-        <div class="product-img">🌐</div>
-        <h3>نود پایه</h3>
-        <p>مناسب برای شروع و استفاده معمولی.</p>
-        <div class="price">۵۰,۰۰۰ تومان</div>
-        <button class="buy" onclick="addToCart('نود پایه',50000)">
-            افزودن به سبد
+    <div class="dashboard">
+        <div class="card">
+            <div class="card-title">رزروهای امروز</div>
+            <div class="card-number" id="todayBookings">3</div>
+        </div>
+        <div class="card">
+            <div class="card-title">زمان‌های آزاد</div>
+            <div class="card-number" id="availableTimes">9</div>
+        </div>
+        <div class="card">
+            <div class="card-title">وضعیت اتاق</div>
+            <div class="card-number" style="color:#00ff88;">آزاد</div>
+        </div>
+    </div>
+    <div class="booking-box">
+        <h2>انتخاب تاریخ</h2>
+        <div class="date-row">
+            <div class="date active">
+                <small>امروز</small>
+                <b>12 سپتامبر</b>
+            </div>
+            <div class="date">
+                <small>فردا</small>
+                <b>13 سپتامبر</b>
+            </div>
+            <div class="date">
+                <small>شنبه</small>
+                <b>14 سپتامبر</b>
+            </div>
+            <div class="date">
+                <small>یکشنبه</small>
+                <b>15 سپتامبر</b>
+            </div>
+            <div class="date">
+                <small>دوشنبه</small>
+                <b>16 سپتامبر</b>
+            </div>
+        </div>
+        <h2>انتخاب ساعت</h2>
+        <div class="times">
+            <div class="time available">14:00</div>
+            <div class="time available">15:00</div>
+            <div class="time booked">16:00<br><small>رزرو شده</small></div>
+            <div class="time available">17:00</div>
+            <div class="time available">18:00</div>
+            <div class="time booked">19:00<br><small>رزرو شده</small></div>
+            <div class="time available">20:00</div>
+            <div class="time available">21:00</div>
+        </div>
+        <button class="reserve-btn" onclick="reserve()">
+            رزرو این زمان
         </button>
+        <div class="info">
+            با انتخاب ساعت و فشردن دکمه رزرو، نوبت شما ثبت خواهد شد.
+        </div>
     </div>
-    <div class="product">
-        <div class="product-img">⚡</div>
-        <h3>نود حرفه‌ای</h3>
-        <p>قدرت و امکانات بیشتر برای کاربران حرفه‌ای.</p>
-        <div class="price">۱۲۰,۰۰۰ تومان</div>
-        <button class="buy" onclick="addToCart('نود حرفه‌ای',120000)">
-            افزودن به سبد
-        </button>
-    </div>
-    <div class="product">
-        <div class="product-img">🚀</div>
-        <h3>نود ویژه</h3>
-        <p>نسخه ویژه با امکانات کامل.</p>
-        <div class="price">۲۵۰,۰۰۰ تومان</div>
-        <button class="buy" onclick="addToCart('نود ویژه',250000)">
-            افزودن به سبد
-        </button>
-    </div>
-    <div class="product">
-        <div class="product-img">👑</div>
-        <h3>نود VIP</h3>
-        <p>بالاترین سطح سرویس نود شاپور.</p>
-        <div class="price">۵۰۰,۰۰۰ تومان</div>
-        <button class="buy" onclick="addToCart('نود VIP',500000)">
-            افزودن به سبد
-        </button>
-    </div>
-</div>
-</section>
-<footer>
-    © 2026 نود شاپور — تمامی حقوق محفوظ است.
-</footer>
-<!-- CART -->
-<div class="panel" id="cartPanel">
-    <div class="box">
-        <button class="close" onclick="closePanels()">✕</button>
-        <h2>🛒 سبد خرید</h2>
-    <div id="cartItems">
-        <p style="color:#777">سبد خرید خالی است.</p>
-    </div>
-    <div class="total">
-        مجموع: <span id="total">۰</span> تومان
-    </div>
-    <button class="checkout" onclick="checkout()">
-        ادامه و ثبت سفارش
-    </button>
-</div>
-</div>
-<!-- USER -->
-<div class="panel" id="userPanel">
-    <div class="box">
-        <button class="close" onclick="closePanels()">✕</button>
-    <h2>👤 پنل کاربری</h2>
-    <input id="username" placeholder="نام کاربری">
-    <input id="email" placeholder="ایمیل">
-    <button class="checkout" onclick="saveUser()">
-        ذخیره اطلاعات
-    </button>
-    <p id="userStatus" style="margin-top:15px;color:#00ff88"></p>
-</div>
 </div>
 <script>
-let cart = [];
-function addToCart(name,price){
-    cart.push({
-        name:name,
-        price:price
-    });
-    updateCart();
-    alert("محصول به سبد خرید اضافه شد.");
-}
-function removeFromCart(index){
-    cart.splice(index,1);
-    updateCart();
-}
-function updateCart(){
-    document.getElementById("cartCount").innerText = cart.length;
-    let box = document.getElementById("cartItems");
-    if(cart.length === 0){
-        box.innerHTML =
-        '<p style="color:#777">سبد خرید خالی است.</p>';
-    }else{
-        box.innerHTML = "";
-        cart.forEach((item,index)=>{
-            box.innerHTML += `
-                <div class="cart-item">
-                    <span>${item.name}</span>
-                    <span>
-                        ${item.price.toLocaleString()}
-                        تومان
-                        <button onclick="removeFromCart(${index})">
-                            حذف
-                        </button>
-                    </span>
-                </div>
-            `;
+    let selectedTime = null;
+    document.querySelectorAll(".date").forEach(date => {
+        date.addEventListener("click", () => {
+            document.querySelectorAll(".date")
+                .forEach(x => x.classList.remove("active"));
+            date.classList.add("active");
         });
+    });
+    document.querySelectorAll(".time.available").forEach(time => {
+        time.addEventListener("click", () => {
+            document.querySelectorAll(".time")
+                .forEach(x => x.classList.remove("selected"));
+            time.classList.add("selected");
+            selectedTime = time.innerText;
+        });
+    });
+    function reserve() {
+        if (!selectedTime) {
+            alert("لطفاً ابتدا یک ساعت انتخاب کنید.");
+            return;
+        }
+        alert("نوبت ساعت " + selectedTime + " انتخاب شد.");
     }
-    let total = cart.reduce((sum,item)=>sum + item.price,0);
-    document.getElementById("total").innerText =
-        total.toLocaleString();
-}
-function openPanel(type){
-    closePanels();
-    if(type === "cart"){
-        document.getElementById("cartPanel").style.display="flex";
-    }
-    if(type === "user"){
-        document.getElementById("userPanel").style.display="flex";
-    }
-}
-function closePanels(){
-    document.getElementById("cartPanel").style.display="none";
-    document.getElementById("userPanel").style.display="none";
-}
-function saveUser(){
-    let name = document.getElementById("username").value;
-    let email = document.getElementById("email").value;
-    if(!name || !email){
-        document.getElementById("userStatus").innerText =
-        "لطفاً اطلاعات را کامل وارد کنید.";
-        return;
-    }
-    localStorage.setItem("shopUserName",name);
-    localStorage.setItem("shopUserEmail",email);
-    document.getElementById("userStatus").innerText =
-    "اطلاعات با موفقیت ذخیره شد.";
-}
-function checkout(){
-    if(cart.length === 0){
-        alert("سبد خرید شما خالی است.");
-        return;
-    }
-    alert(
-        "سفارش شما آماده ثبت است.\n\n" +
-        "برای پرداخت واقعی باید درگاه پرداخت و بک‌اند به سایت متصل شود."
-    );
-}
-window.onload = function(){
-    let name = localStorage.getItem("shopUserName");
-    let email = localStorage.getItem("shopUserEmail");
-    if(name)
-        document.getElementById("username").value=name;
-    if(email)
-        document.getElementById("email").value=email;
-};
 </script>
 </body>
 </html>
