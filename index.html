@@ -1,47 +1,424 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-<title>My Website</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نود شاپور | فروشگاه</title>
 <style>
-
-* {
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma,Arial,sans-serif;
 }
-
-html, body {
-    margin: 0;
-    padding: 0;
-    background: #eeeeee;
+body{
+    background:#070707;
+    color:#fff;
 }
-
-.website {
-    position: relative;
-    width: 900px;
-    height: 600px;
-    margin: 30px auto;
-    background: #ffffff;
-    overflow: hidden;
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(10,10,10,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #222;
+    padding:18px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
-
-button {
-    cursor: pointer;
+.logo{
+    font-size:25px;
+    font-weight:bold;
 }
-
+.logo span{
+    color:#00ff88;
+}
+nav{
+    display:flex;
+    gap:10px;
+}
+nav button{
+    background:#151515;
+    border:1px solid #292929;
+    color:#fff;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+nav button:hover{
+    border-color:#00ff88;
+    color:#00ff88;
+}
+.hero{
+    min-height:360px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+    background:
+    radial-gradient(circle at center,#063d27 0,#07130e 35%,#070707 70%);
+}
+.hero h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+.hero h1 span{
+    color:#00ff88;
+}
+.hero p{
+    color:#aaa;
+    font-size:17px;
+}
+.shop{
+    max-width:1200px;
+    margin:auto;
+    padding:45px 20px;
+}
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+.section-title h2{
+    font-size:30px;
+}
+.section-title p{
+    color:#777;
+    margin-top:8px;
+}
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+.product{
+    background:#111;
+    border:1px solid #242424;
+    border-radius:18px;
+    padding:20px;
+    transition:.25s;
+}
+.product:hover{
+    transform:translateY(-6px);
+    border-color:#00ff88;
+    box-shadow:0 10px 35px rgba(0,255,136,.12);
+}
+.product-img{
+    height:150px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#123c2b,#101010);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    margin-bottom:18px;
+}
+.product h3{
+    margin-bottom:10px;
+}
+.product p{
+    color:#888;
+    font-size:14px;
+    line-height:1.7;
+    min-height:45px;
+}
+.price{
+    color:#00ff88;
+    font-size:20px;
+    font-weight:bold;
+    margin:17px 0;
+}
+.buy{
+    width:100%;
+    border:0;
+    padding:12px;
+    border-radius:10px;
+    background:#00ff88;
+    color:#001b0e;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+.buy:hover{
+    background:#00d875;
+}
+.panel{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:200;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.box{
+    width:100%;
+    max-width:450px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 20px 70px #000;
+}
+.box h2{
+    margin-bottom:20px;
+}
+.box input{
+    width:100%;
+    padding:13px;
+    margin-bottom:12px;
+    background:#080808;
+    color:#fff;
+    border:1px solid #292929;
+    border-radius:10px;
+    outline:none;
+}
+.box input:focus{
+    border-color:#00ff88;
+}
+.close{
+    float:left;
+    background:#222;
+    color:#fff;
+    border:0;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:13px 0;
+    border-bottom:1px solid #252525;
+}
+.cart-item button{
+    background:#ff3d3d;
+    color:white;
+    border:0;
+    border-radius:7px;
+    padding:6px 9px;
+    cursor:pointer;
+}
+.total{
+    margin-top:20px;
+    font-size:20px;
+    color:#00ff88;
+    font-weight:bold;
+}
+.checkout{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#00ff88;
+    font-weight:bold;
+    cursor:pointer;
+}
+footer{
+    text-align:center;
+    padding:40px;
+    color:#555;
+    border-top:1px solid #181818;
+}
+@media(max-width:600px){
+    header{
+        padding:15px;
+    }
+    .hero h1{
+        font-size:35px;
+    }
+    nav button{
+        padding:8px 10px;
+        font-size:12px;
+    }
+}
 </style>
-
 </head>
-
 <body>
-
-<div class="website">
-
-<a href="https://splus.ir/ShirandKhurshidteam" style="position:absolute;left:90px;top:149px;width:180px;height:45px;font-size:16px;color:#ff0000;">جهت سيک کردن به جنده خونه امير حسين چيز ببخشيد گپ امير حسين لمس کونيد</a>
-
+<header>
+    <div class="logo">
+        نود <span>شاپور</span>
+    </div>
+<nav>
+    <button onclick="openPanel('cart')">
+        🛒 سبد خرید (<span id="cartCount">0</span>)
+    </button>
+    <button onclick="openPanel('user')">
+        👤 پنل کاربری
+    </button>
+</nav>
+</header>
+<section class="hero">
+    <div>
+        <h1>به <span>نود شاپور</span> خوش آمدید</h1>
+        <p>فروشگاه مدرن و سریع شما</p>
+    </div>
+</section>
+<section class="shop">
+<div class="section-title">
+    <h2>محصولات</h2>
+    <p>محصول موردنظر خود را انتخاب کنید</p>
 </div>
-
+<div class="products">
+    <div class="product">
+        <div class="product-img">🌐</div>
+        <h3>نود پایه</h3>
+        <p>مناسب برای شروع و استفاده معمولی.</p>
+        <div class="price">۵۰,۰۰۰ تومان</div>
+        <button class="buy" onclick="addToCart('نود پایه',50000)">
+            افزودن به سبد
+        </button>
+    </div>
+    <div class="product">
+        <div class="product-img">⚡</div>
+        <h3>نود حرفه‌ای</h3>
+        <p>قدرت و امکانات بیشتر برای کاربران حرفه‌ای.</p>
+        <div class="price">۱۲۰,۰۰۰ تومان</div>
+        <button class="buy" onclick="addToCart('نود حرفه‌ای',120000)">
+            افزودن به سبد
+        </button>
+    </div>
+    <div class="product">
+        <div class="product-img">🚀</div>
+        <h3>نود ویژه</h3>
+        <p>نسخه ویژه با امکانات کامل.</p>
+        <div class="price">۲۵۰,۰۰۰ تومان</div>
+        <button class="buy" onclick="addToCart('نود ویژه',250000)">
+            افزودن به سبد
+        </button>
+    </div>
+    <div class="product">
+        <div class="product-img">👑</div>
+        <h3>نود VIP</h3>
+        <p>بالاترین سطح سرویس نود شاپور.</p>
+        <div class="price">۵۰۰,۰۰۰ تومان</div>
+        <button class="buy" onclick="addToCart('نود VIP',500000)">
+            افزودن به سبد
+        </button>
+    </div>
+</div>
+</section>
+<footer>
+    © 2026 نود شاپور — تمامی حقوق محفوظ است.
+</footer>
+<!-- CART -->
+<div class="panel" id="cartPanel">
+    <div class="box">
+        <button class="close" onclick="closePanels()">✕</button>
+        <h2>🛒 سبد خرید</h2>
+    <div id="cartItems">
+        <p style="color:#777">سبد خرید خالی است.</p>
+    </div>
+    <div class="total">
+        مجموع: <span id="total">۰</span> تومان
+    </div>
+    <button class="checkout" onclick="checkout()">
+        ادامه و ثبت سفارش
+    </button>
+</div>
+</div>
+<!-- USER -->
+<div class="panel" id="userPanel">
+    <div class="box">
+        <button class="close" onclick="closePanels()">✕</button>
+    <h2>👤 پنل کاربری</h2>
+    <input id="username" placeholder="نام کاربری">
+    <input id="email" placeholder="ایمیل">
+    <button class="checkout" onclick="saveUser()">
+        ذخیره اطلاعات
+    </button>
+    <p id="userStatus" style="margin-top:15px;color:#00ff88"></p>
+</div>
+</div>
+<script>
+let cart = [];
+function addToCart(name,price){
+    cart.push({
+        name:name,
+        price:price
+    });
+    updateCart();
+    alert("محصول به سبد خرید اضافه شد.");
+}
+function removeFromCart(index){
+    cart.splice(index,1);
+    updateCart();
+}
+function updateCart(){
+    document.getElementById("cartCount").innerText = cart.length;
+    let box = document.getElementById("cartItems");
+    if(cart.length === 0){
+        box.innerHTML =
+        '<p style="color:#777">سبد خرید خالی است.</p>';
+    }else{
+        box.innerHTML = "";
+        cart.forEach((item,index)=>{
+            box.innerHTML += `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span>
+                        ${item.price.toLocaleString()}
+                        تومان
+                        <button onclick="removeFromCart(${index})">
+                            حذف
+                        </button>
+                    </span>
+                </div>
+            `;
+        });
+    }
+    let total = cart.reduce((sum,item)=>sum + item.price,0);
+    document.getElementById("total").innerText =
+        total.toLocaleString();
+}
+function openPanel(type){
+    closePanels();
+    if(type === "cart"){
+        document.getElementById("cartPanel").style.display="flex";
+    }
+    if(type === "user"){
+        document.getElementById("userPanel").style.display="flex";
+    }
+}
+function closePanels(){
+    document.getElementById("cartPanel").style.display="none";
+    document.getElementById("userPanel").style.display="none";
+}
+function saveUser(){
+    let name = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    if(!name || !email){
+        document.getElementById("userStatus").innerText =
+        "لطفاً اطلاعات را کامل وارد کنید.";
+        return;
+    }
+    localStorage.setItem("shopUserName",name);
+    localStorage.setItem("shopUserEmail",email);
+    document.getElementById("userStatus").innerText =
+    "اطلاعات با موفقیت ذخیره شد.";
+}
+function checkout(){
+    if(cart.length === 0){
+        alert("سبد خرید شما خالی است.");
+        return;
+    }
+    alert(
+        "سفارش شما آماده ثبت است.\n\n" +
+        "برای پرداخت واقعی باید درگاه پرداخت و بک‌اند به سایت متصل شود."
+    );
+}
+window.onload = function(){
+    let name = localStorage.getItem("shopUserName");
+    let email = localStorage.getItem("shopUserEmail");
+    if(name)
+        document.getElementById("username").value=name;
+    if(email)
+        document.getElementById("email").value=email;
+};
+</script>
 </body>
 </html>
