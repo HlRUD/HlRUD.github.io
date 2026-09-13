@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>میم رندوم</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #111;
+            color: white;
+            font-family: Tahoma, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        button {
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #111;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        #memeBox {
+            margin-top: 30px;
+        }
+
+        #meme {
+            max-width: 100%;
+            max-height: 65vh;
+            border-radius: 15px;
+            display: none;
+            margin: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        #title {
+            margin-top: 15px;
+            color: #bbb;
+            font-size: 15px;
+        }
+
+        #loading {
+            display: none;
+            color: #aaa;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>😂 میم رندوم</h1>
+
+        <button onclick="randomMeme()">
+            🎲 میم رندوم
+        </button>
+
+        <div id="loading">
+            در حال پیدا کردن میم...
+        </div>
+
+        <div id="memeBox">
+            <img id="meme" alt="Random Meme">
+            <div id="title"></div>
+        </div>
+
+    </div>
+
+    <script>
+        async function randomMeme() {
+
+            const meme = document.getElementById("meme");
+            const title = document.getElementById("title");
+            const loading = document.getElementById("loading");
+
+            meme.style.display = "none";
+            title.innerText = "";
+            loading.style.display = "block";
+
+            try {
+                const response = await fetch(
+                    "https://meme-api.com/gimme"
+                );
+
+                const data = await response.json();
+
+                if (data.nsfw || data.spoiler) {
+                    randomMeme();
+                    return;
+                }
+
+                meme.src = data.url;
+
+                meme.onload = function () {
+                    loading.style.display = "none";
+                    meme.style.display = "block";
+                };
+
+                title.innerText = data.title || "";
+
+            } catch (error) {
+                loading.innerText = "خطا در دریافت میم 😕";
+            }
+        }
+    </script>
+
+</body>
+</html>
