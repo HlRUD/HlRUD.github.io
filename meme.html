@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>میم رندوم</title>
+    <title>Random Meme</title>
 
     <style>
         * {
@@ -14,105 +14,232 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background: #111;
-            color: white;
             font-family: Tahoma, Arial, sans-serif;
+            background:
+                radial-gradient(circle at top, #292929 0%, #111 45%, #080808 100%);
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
+            padding: 25px;
         }
 
-        .container {
+        .app {
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
+            text-align: center;
         }
 
-        h1 {
+        .header {
             margin-bottom: 25px;
         }
 
-        button {
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .random-btn {
             border: none;
-            padding: 15px 30px;
-            border-radius: 12px;
-            background: #ffffff;
-            color: #111;
-            font-size: 18px;
-            font-weight: bold;
+            outline: none;
             cursor: pointer;
+            padding: 15px 35px;
+            border-radius: 14px;
+            background: #fff;
+            color: #111;
+            font-size: 17px;
+            font-weight: bold;
             transition: 0.2s;
+            box-shadow: 0 8px 25px rgba(0,0,0,.35);
         }
 
-        button:hover {
-            transform: scale(1.05);
+        .random-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.5);
         }
 
-        button:active {
-            transform: scale(0.97);
+        .random-btn:active {
+            transform: scale(.97);
         }
 
-        #memeBox {
+        .card {
             margin-top: 30px;
+            padding: 18px;
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            display: none;
         }
 
-        #meme {
+        .meme-title {
+            font-size: 17px;
+            color: #ddd;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .meme-image {
             max-width: 100%;
             max-height: 65vh;
-            border-radius: 15px;
-            display: none;
+            border-radius: 14px;
+            display: block;
             margin: auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            object-fit: contain;
+            box-shadow: 0 10px 35px rgba(0,0,0,.45);
         }
 
-        #title {
-            margin-top: 15px;
-            color: #bbb;
-            font-size: 15px;
+        .buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 18px;
+            flex-wrap: wrap;
         }
 
-        #loading {
+        .btn {
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            padding: 12px 22px;
+            border-radius: 11px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .download {
+            background: #fff;
+            color: #111;
+        }
+
+        .source {
+            background: #292929;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .loading {
             display: none;
-            color: #aaa;
             margin-top: 25px;
+            color: #aaa;
+        }
+
+        .error {
+            color: #ff7777;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .random-btn {
+                width: 100%;
+            }
+
+            .card {
+                padding: 12px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <main class="app">
 
-        <h1>😂 میم رندوم</h1>
+        <div class="header">
+            <h1>Random Meme</h1>
+            <p>هر بار یک میم تصادفی</p>
+        </div>
 
-        <button onclick="randomMeme()">
-            🎲 میم رندوم
+        <button class="random-btn" onclick="randomMeme()">
+            میم رندوم
         </button>
 
-        <div id="loading">
-            در حال پیدا کردن میم...
+        <div class="loading" id="loading">
+            در حال دریافت میم...
         </div>
 
-        <div id="memeBox">
-            <img id="meme" alt="Random Meme">
-            <div id="title"></div>
+        <div class="error" id="error">
+            دریافت میم با مشکل مواجه شد.
         </div>
 
-    </div>
+        <div class="card" id="card">
+
+            <div class="meme-title" id="title"></div>
+
+            <img
+                id="meme"
+                class="meme-image"
+                alt="Random Meme"
+            >
+
+            <div class="buttons">
+
+                <a
+                    id="download"
+                    class="btn download"
+                    href="#"
+                    download
+                >
+                    دانلود میم
+                </a>
+
+                <a
+                    id="source"
+                    class="btn source"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    لینک میم
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
 
     <script>
         async function randomMeme() {
 
+            const card = document.getElementById("card");
             const meme = document.getElementById("meme");
             const title = document.getElementById("title");
             const loading = document.getElementById("loading");
+            const error = document.getElementById("error");
+            const download = document.getElementById("download");
+            const source = document.getElementById("source");
 
-            meme.style.display = "none";
-            title.innerText = "";
+            card.style.display = "none";
+            error.style.display = "none";
             loading.style.display = "block";
 
             try {
+
                 const response = await fetch(
                     "https://meme-api.com/gimme"
                 );
@@ -127,14 +254,20 @@
                 meme.src = data.url;
 
                 meme.onload = function () {
+
                     loading.style.display = "none";
-                    meme.style.display = "block";
+                    card.style.display = "block";
+
+                    title.textContent = data.title || "میم بدون عنوان";
+
+                    download.href = data.url;
+                    source.href = data.postLink || data.url;
                 };
 
-                title.innerText = data.title || "";
+            } catch (err) {
 
-            } catch (error) {
-                loading.innerText = "خطا در دریافت میم 😕";
+                loading.style.display = "none";
+                error.style.display = "block";
             }
         }
     </script>
