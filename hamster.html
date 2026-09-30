@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamster Clicker</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    margin: 0;
+    background: #11131a;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.app {
+    max-width: 430px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.level {
+    background: #242833;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+/* Coins */
+.coins {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.coins h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.coins p {
+    color: #9da3b4;
+    margin-top: 5px;
+}
+
+/* Hamster */
+.hamster-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.hamster {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: #f4a62a;
+    border: 8px solid #ffd36a;
+    box-shadow: 0 0 45px rgba(244,166,42,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    cursor: pointer;
+    transition: transform .08s;
+}
+
+.hamster:active {
+    transform: scale(.92);
+}
+
+/* Energy */
+.energy-box {
+    margin-top: 10px;
+}
+
+.energy-text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    color: #c8ccd6;
+}
+
+.energy-bar {
+    width: 100%;
+    height: 12px;
+    background: #292d38;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.energy-fill {
+    height: 100%;
+    width: 100%;
+    background: #ffd23f;
+    transition: width .2s;
+}
+
+/* Buttons */
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+button {
+    border: 0;
+    padding: 15px;
+    border-radius: 14px;
+    background: #242833;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #303541;
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+/* Stats */
+.stats {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.stat {
+    background: #1b1e27;
+    padding: 15px;
+    border-radius: 14px;
+}
+
+.stat small {
+    color: #9298a8;
+}
+
+.stat strong {
+    display: block;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+/* Upgrade panel */
+.upgrade {
+    margin-top: 20px;
+    background: #1b1e27;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.upgrade h3 {
+    margin-top: 0;
+}
+
+.upgrade-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.upgrade button {
+    background: #ffd23f;
+    color: #171717;
+    font-weight: bold;
+}
+
+.upgrade button:disabled {
+    opacity: .4;
+}
+
+/* Floating +coin */
+.float {
+    position: fixed;
+    pointer-events: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffd23f;
+    animation: floatUp .8s forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-90px);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="header">
+        <div class="title">🐹 Hamster Clicker</div>
+        <div class="level">
+            Level <span id="level">1</span>
+        </div>
+    </div>
+
+    <div class="coins">
+        <h1>🪙 <span id="coins">0</span></h1>
+        <p>Coins</p>
+    </div>
+
+    <div class="hamster-container">
+        <div class="hamster" id="hamster">
+            🐹
+        </div>
+    </div>
+
+    <div class="energy-box">
+        <div class="energy-text">
+            <span>⚡ Energy</span>
+            <span id="energyText">1000 / 1000</span>
+        </div>
+
+        <div class="energy-bar">
+            <div class="energy-fill" id="energyFill"></div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <small>Per Click</small>
+            <strong>+<span id="clickPower">1</span></strong>
+        </div>
+
+        <div class="stat">
+            <small>Passive Income</small>
+            <strong>+<span id="passive">0</span>/sec</strong>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button onclick="dailyBonus()">
+            🎁 Daily Bonus
+        </button>
+
+        <button onclick="resetGame()">
+            🔄 Reset
+        </button>
+    </div>
+
+    <div class="upgrade">
+        <h3>🚀 Upgrade</h3>
+
+        <div class="upgrade-row">
+            <div>
+                <div>Click Power</div>
+                <small>
+                    Cost: <span id="upgradeCost">100</span> 🪙
+                </small>
+            </div>
+
+            <button id="upgradeButton" onclick="upgradeClick()">
+                Upgrade
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+   GAME DATA
+========================= */
+
+let game = JSON.parse(localStorage.getItem("hamsterGame")) || {
+    coins: 0,
+    level: 1,
+    energy: 1000,
+    maxEnergy: 1000,
+    clickPower: 1,
+    passive: 0,
+    upgradeCost: 100,
+    dailyClaimed: false
+};
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveGame() {
+    localStorage.setItem(
+        "hamsterGame",
+        JSON.stringify(game)
+    );
+}
+
+
+/* =========================
+   UI
+========================= */
+
+function updateUI() {
+
+    document.getElementById("coins").textContent =
+        Math.floor(game.coins).toLocaleString();
+
+    document.getElementById("level").textContent =
+        game.level;
+
+    document.getElementById("clickPower").textContent =
+        game.clickPower;
+
+    document.getElementById("passive").textContent =
+        game.passive;
+
+    document.getElementById("upgradeCost").textContent =
+        game.upgradeCost.toLocaleString();
+
+    document.getElementById("energyText").textContent =
+        `${Math.floor(game.energy)} / ${game.maxEnergy}`;
+
+    let percent =
+        (game.energy / game.maxEnergy) * 100;
+
+    document.getElementById("energyFill").style.width =
+        percent + "%";
+
+    document.getElementById("upgradeButton").disabled =
+        game.coins < game.upgradeCost;
+}
+
+
+/* =========================
+   HAMSTER CLICK
+========================= */
+
+document.getElementById("hamster").addEventListener(
+    "click",
+    function(event) {
+
+        if (game.energy <= 0) return;
+
+        game.coins += game.clickPower;
+
+        game.energy -= 1;
+
+        createFloatingCoin(
+            event.clientX,
+            event.clientY,
+            "+" + game.clickPower
+        );
+
+        updateLevel();
+
+        updateUI();
+        saveGame();
+    }
+);
+
+
+/* =========================
+   FLOATING COIN
+========================= */
+
+function createFloatingCoin(x, y, text) {
+
+    const element = document.createElement("div");
+
+    element.className = "float";
+
+    element.textContent = "🪙 " + text;
+
+    element.style.left = x + "px";
+    element.style.top = y + "px";
+
+    document.body.appendChild(element);
+
+    setTimeout(() => {
+        element.remove();
+    }, 800);
+}
+
+
+/* =========================
+   LEVEL
+========================= */
+
+function updateLevel() {
+
+    let newLevel =
+        Math.floor(game.coins / 1000) + 1;
+
+    if (newLevel > game.level) {
+
+        game.level = newLevel;
+
+        game.maxEnergy += 100;
+
+        game.energy = game.maxEnergy;
+    }
+}
+
+
+/* =========================
+   ENERGY REGEN
+========================= */
+
+setInterval(() => {
+
+    if (game.energy < game.maxEnergy) {
+
+        game.energy += 3;
+
+        if (game.energy > game.maxEnergy) {
+            game.energy = game.maxEnergy;
+        }
+
+        updateUI();
+        saveGame();
+    }
+
+}, 1000);
+
+
+/* =========================
+   PASSIVE INCOME
+========================= */
+
+setInterval(() => {
+
+    if (game.passive > 0) {
+
+        game.coins += game.passive;
+
+        updateLevel();
+
+        updateUI();
+        saveGame();
+    }
+
+}, 1000);
+
+
+/* =========================
+   UPGRADE
+========================= */
+
+function upgradeClick() {
+
+    if (game.coins < game.upgradeCost) {
+        return;
+    }
+
+    game.coins -= game.upgradeCost;
+
+    game.clickPower += 1;
+
+    game.upgradeCost =
+        Math.floor(game.upgradeCost * 1.6);
+
+    updateUI();
+    saveGame();
+}
+
+
+/* =========================
+   DAILY BONUS
+========================= */
+
+function dailyBonus() {
+
+    if (game.dailyClaimed) {
+
+        alert("Daily bonus already claimed!");
+
+        return;
+    }
+
+    game.coins += 1000;
+
+    game.dailyClaimed = true;
+
+    alert("🎁 You received 1000 coins!");
+
+    updateUI();
+    saveGame();
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetGame() {
+
+    if (!confirm("Reset your game?")) {
+        return;
+    }
+
+    localStorage.removeItem("hamsterGame");
+
+    location.reload();
+}
+
+
+/* =========================
+   START
+========================= */
+
+updateUI();
+
+</script>
+
+</body>
+</html>
