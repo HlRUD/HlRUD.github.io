@@ -1,211 +1,829 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>سیبیلستر</title>
+<meta charset="UTF-8">
 
-    <style>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        * {
-            box-sizing: border-box;
-            user-select: none;
-        }
+<title>سیبیلستر</title>
 
-        body {
-            margin: 0;
-            background: #111318;
-            color: white;
-            font-family: Tahoma, Arial, sans-serif;
-        }
+<style>
 
-        .بازی {
-            width: 100%;
-            max-width: 430px;
-            min-height: 100vh;
-            margin: auto;
-            padding: 20px;
-            text-align: center;
-        }
+/* =====================================================
+   تنظیمات اصلی
+===================================================== */
 
-        .عنوان {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+* {
+    box-sizing: border-box;
 
-        .سکه {
-            margin-top: 35px;
-        }
+    user-select: none;
+    -webkit-user-select: none;
 
-        .سکه-عدد {
-            font-size: 42px;
-            font-weight: bold;
-        }
+    -webkit-tap-highlight-color: transparent;
 
-        .سکه-متن {
-            color: #999;
-            margin-top: 5px;
-        }
+    -webkit-touch-callout: none;
+}
 
-        /* سیبیلستر */
+html,
+body {
+    margin: 0;
+    padding: 0;
 
-        .سیبیلستر {
-            width: 220px;
-            height: 220px;
+    width: 100%;
+    min-height: 100%;
 
-            margin: 40px auto;
+    background: #0c0e13;
 
-            border-radius: 50%;
+    color: white;
 
-            background: #d99a62;
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+}
 
-            border: 8px solid #f0bd86;
+body {
+    overflow-x: hidden;
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+button,
+div {
+    -webkit-tap-highlight-color: transparent;
+}
 
-            font-size: 100px;
+button:focus,
+button:active,
+div:focus,
+div:active {
+    outline: none;
+}
 
-            cursor: pointer;
 
-            transition: transform 0.08s;
-        }
+/* =====================================================
+   برنامه
+===================================================== */
 
-        .سیبیلستر:active {
-            transform: scale(0.92);
-        }
+.برنامه {
 
-        /* انرژی */
+    width: 100%;
 
-        .انرژی-اطلاعات {
-            display: flex;
-            justify-content: space-between;
+    max-width: 480px;
 
-            margin-bottom: 8px;
+    min-height: 100vh;
 
-            color: #ccc;
-        }
+    margin: auto;
 
-        .نوار-انرژی {
-            width: 100%;
-            height: 14px;
+    padding: 15px;
 
-            background: #292d35;
+    padding-bottom: 100px;
+}
 
-            border-radius: 20px;
 
-            overflow: hidden;
-        }
+/* =====================================================
+   هدر
+===================================================== */
 
-        .انرژی {
-            width: 100%;
-            height: 100%;
+.هدر {
 
-            background: #ffd23f;
+    display: flex;
 
-            transition: width 0.2s;
-        }
+    justify-content: space-between;
 
-        .راهنما {
-            margin-top: 25px;
+    align-items: center;
 
-            color: #999;
+    margin-bottom: 20px;
+}
 
-            font-size: 14px;
-        }
+.نام-بازی {
 
-        /* سکه‌ای که هنگام کلیک ظاهر می‌شود */
+    font-size: 21px;
 
-        .سکه-شناور {
-            position: fixed;
+    font-weight: bold;
+}
 
-            color: #ffd23f;
+.سطح {
 
-            font-size: 24px;
+    background: #20242d;
 
-            font-weight: bold;
+    border: 1px solid #303641;
 
-            pointer-events: none;
+    border-radius: 12px;
 
-            animation: بالا 0.8s forwards;
-        }
+    padding: 8px 12px;
 
-        @keyframes بالا {
+    font-size: 13px;
+}
 
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
 
-            to {
-                opacity: 0;
-                transform: translateY(-80px);
-            }
+/* =====================================================
+   موجودی
+===================================================== */
 
-        }
+.موجودی {
 
-    </style>
+    text-align: center;
+
+    margin-top: 10px;
+}
+
+.تعداد-سکه {
+
+    font-size: 43px;
+
+    font-weight: bold;
+
+    line-height: 1.1;
+}
+
+.متن-سکه {
+
+    color: #8d94a3;
+
+    margin-top: 7px;
+}
+
+
+/* =====================================================
+   نوار XP
+===================================================== */
+
+.xp-box {
+
+    margin-top: 15px;
+}
+
+.xp-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #9ca3b3;
+
+    font-size: 12px;
+
+    margin-bottom: 6px;
+}
+
+.xp-bar {
+
+    width: 100%;
+
+    height: 7px;
+
+    background: #242833;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.xp-fill {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: #8b5cf6;
+
+    transition: width .25s;
+}
+
+
+/* =====================================================
+   کاراکتر سیبیلستر
+===================================================== */
+
+محل-سیبیلستر {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 30px 0;
+}
+
+.سیبیلستر {
+
+    position: relative;
+
+    width: 230px;
+
+    height: 230px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffe1b5 0%,
+            #e5a66d 45%,
+            #b96f3f 100%
+        );
+
+    border: 7px solid #f2c08c;
+
+    box-shadow:
+        0 0 0 8px #171a21,
+        0 15px 50px rgba(0,0,0,.45);
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+
+    transition:
+        transform .06s,
+        box-shadow .15s;
+}
+
+.سیبیلستر:active {
+
+    transform: scale(.91);
+
+    box-shadow:
+        0 0 0 8px #171a21,
+        0 7px 25px rgba(0,0,0,.35);
+}
+
+
+/* چشم */
+
+.چشم {
+
+    position: absolute;
+
+    top: 72px;
+
+    width: 23px;
+
+    height: 30px;
+
+    background: #151515;
+
+    border-radius: 50%;
+}
+
+.چشم-چپ {
+
+    right: 60px;
+}
+
+.چشم-راست {
+
+    left: 60px;
+}
+
+
+/* بینی */
+
+.بینی {
+
+    position: absolute;
+
+    top: 108px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 35px;
+
+    height: 28px;
+
+    background: #8b4d32;
+
+    border-radius: 50%;
+}
+
+
+/* سبیل */
+
+.سبیل {
+
+    position: absolute;
+
+    top: 120px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 125px;
+
+    height: 65px;
+}
+
+.سبیل::before,
+.سبیل::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+
+    width: 67px;
+
+    height: 43px;
+
+    background: #171717;
+
+    border-radius: 100% 0 100% 0;
+}
+
+.سبیل::before {
+
+    right: 50%;
+
+    transform: rotate(15deg);
+}
+
+.سبیل::after {
+
+    left: 50%;
+
+    transform: rotate(-15deg);
+}
+
+
+/* دهان */
+
+.دهان {
+
+    position: absolute;
+
+    bottom: 39px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 55px;
+
+    height: 8px;
+
+    background: #572e25;
+
+    border-radius: 50%;
+}
+
+
+/* =====================================================
+   انرژی
+===================================================== */
+
+.انرژی-box {
+
+    margin-top: 5px;
+}
+
+.انرژی-اطلاعات {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    color: #b7bdc9;
+
+    font-size: 13px;
+}
+
+.انرژی-نوار {
+
+    height: 14px;
+
+    width: 100%;
+
+    background: #242833;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.انرژی {
+
+    height: 100%;
+
+    width: 100%;
+
+    background: #facc15;
+
+    transition: width .15s;
+}
+
+
+/* =====================================================
+   کارت‌های آماری
+===================================================== */
+
+.آمار {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 17px;
+}
+
+.کارت {
+
+    background: #171a21;
+
+    border: 1px solid #242833;
+
+    border-radius: 15px;
+
+    padding: 13px;
+}
+
+.کارت small {
+
+    color: #858c9b;
+}
+
+.کارت strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   دکمه‌ها
+===================================================== */
+
+.دکمه‌ها {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+.دکمه {
+
+    border: 0;
+
+    border-radius: 13px;
+
+    padding: 14px;
+
+    background: #242833;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+.دکمه:active {
+
+    transform: scale(.97);
+}
+
+.دکمه-طلایی {
+
+    background: #eab308;
+
+    color: #171717;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   پنل
+===================================================== */
+
+.پنل {
+
+    margin-top: 15px;
+
+    background: #171a21;
+
+    border: 1px solid #242833;
+
+    border-radius: 17px;
+
+    padding: 16px;
+}
+
+.پنل h3 {
+
+    margin-top: 0;
+
+    margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   فروشگاه
+===================================================== */
+
+.ارتقا {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #292d36;
+}
+
+.ارتقا:last-child {
+
+    border-bottom: 0;
+}
+
+.ارتقا-info {
+
+    flex: 1;
+}
+
+.ارتقا-info small {
+
+    color: #8d94a3;
+}
+
+.خرید {
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 10px 13px;
+
+    background: #facc15;
+
+    color: #171717;
+
+    font-weight: bold;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.خرید:disabled {
+
+    opacity: .35;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   مأموریت
+===================================================== */
+
+.ماموریت {
+
+    padding: 12px;
+
+    margin-bottom: 9px;
+
+    background: #20242d;
+
+    border-radius: 12px;
+}
+
+.ماموریت-بالا {
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.ماموریت small {
+
+    color: #9299a8;
+}
+
+.ماموریت button {
+
+    width: 100%;
+
+    margin-top: 9px;
+
+    padding: 9px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: #8b5cf6;
+
+    color: white;
+
+    font-family: inherit;
+}
+
+.ماموریت button:disabled {
+
+    opacity: .4;
+}
+
+
+/* =====================================================
+   شناور سکه
+===================================================== */
+
+.سکه-شناور {
+
+    position: fixed;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    color: #facc15;
+
+    font-weight: bold;
+
+    font-size: 23px;
+
+    animation: بالا .75s ease-out forwards;
+}
+
+@keyframes بالا {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-90px)
+            scale(1.2);
+    }
+}
+
+
+/* =====================================================
+   اعلان
+===================================================== */
+
+.اعلان {
+
+    position: fixed;
+
+    top: 18px;
+
+    left: 50%;
+
+    transform: translateX(-50%)
+               translateY(-100px);
+
+    z-index: 10000;
+
+    background: #242833;
+
+    border: 1px solid #3a404c;
+
+    padding: 12px 18px;
+
+    border-radius: 13px;
+
+    transition: .3s;
+
+    white-space: nowrap;
+}
+
+.اعلان.نمایش {
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =====================================================
+   فوتر
+===================================================== */
+
+.فوتر {
+
+    text-align: center;
+
+    color: #666d7c;
+
+    font-size: 11px;
+
+    margin-top: 25px;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<div class="بازی">
 
-    <div class="عنوان">
-        🪙 بازی سیبیلستر
-    </div>
+<div class="برنامه">
 
 
-    <div class="سکه">
+    <!-- =========================
+         هدر
+    ========================== -->
 
-        <div class="سکه-عدد">
-            🪙 <span id="سکه">0</span>
+    <div class="هدر">
+
+        <div class="نام-بازی">
+            🥸 سیبیلستر
         </div>
 
-        <div class="سکه-متن">
-            سکه
-        </div>
+        <div class="سطح">
 
-    </div>
-
-
-    <!-- سیبیلستر -->
-
-    <div
-        class="سیبیلستر"
-        id="سیبیلستر">
-
-        🥸
-
-    </div>
-
-
-    <!-- انرژی -->
-
-    <div>
-
-        <div class="انرژی-اطلاعات">
-
-            <span>⚡ انرژی</span>
-
-            <span>
-                <span id="انرژی-عدد">100</span>
-                /
-                100
+            سطح
+            <span id="سطح">
+                1
             </span>
 
         </div>
 
+    </div>
 
-        <div class="نوار-انرژی">
+
+    <!-- =========================
+         سکه
+    ========================== -->
+
+    <div class="موجودی">
+
+        <div class="تعداد-سکه">
+
+            🪙
+            <span id="سکه">
+                0
+            </span>
+
+        </div>
+
+        <div class="متن-سکه">
+            موجودی سکه
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         XP
+    ========================== -->
+
+    <div class="xp-box">
+
+        <div class="xp-info">
+
+            <span>
+                تجربه
+            </span>
+
+            <span id="xp-text">
+                0 / 100
+            </span>
+
+        </div>
+
+        <div class="xp-bar">
 
             <div
-                class="انرژی"
-                id="نوار">
-
+                class="xp-fill"
+                id="xp">
             </div>
 
         </div>
@@ -213,108 +831,924 @@
     </div>
 
 
-    <div class="راهنما">
+    <!-- =========================
+         سیبیلستر
+    ========================== -->
 
-        برای گرفتن سکه روی سیبیلستر بزن!
+    <محل-سیبیلستر>
+
+        <div
+            class="سیبیلستر"
+            id="سیبیلستر"
+            tabindex="-1">
+
+            <div
+                class="چشم چشم-چپ">
+            </div>
+
+            <div
+                class="چشم چشم-راست">
+            </div>
+
+            <div class="بینی">
+            </div>
+
+            <div class="سبیل">
+            </div>
+
+            <div class="دهان">
+            </div>
+
+        </div>
+
+    </محل-سیبیلستر>
+
+
+    <!-- =========================
+         انرژی
+    ========================== -->
+
+    <div class="انرژی-box">
+
+        <div class="انرژی-اطلاعات">
+
+            <span>
+                ⚡ انرژی
+            </span>
+
+            <span>
+
+                <span id="انرژی">
+                    1000
+                </span>
+
+                /
+
+                <span id="حداکثر-انرژی">
+                    1000
+                </span>
+
+            </span>
+
+        </div>
+
+        <div class="انرژی-نوار">
+
+            <div
+                class="انرژی"
+                id="نوار-انرژی">
+            </div>
+
+        </div>
 
     </div>
+
+
+    <!-- =========================
+         آمار
+    ========================== -->
+
+    <div class="آمار">
+
+        <div class="کارت">
+
+            <small>
+                قدرت کلیک
+            </small>
+
+            <strong>
+                +<span id="قدرت">
+                    1
+                </span>
+            </strong>
+
+        </div>
+
+
+        <div class="کارت">
+
+            <small>
+                درآمد خودکار
+            </small>
+
+            <strong>
+
+                +<span id="درآمد">
+                    0
+                </span>
+
+                /ثانیه
+
+            </strong>
+
+        </div>
+
+
+        <div class="کارت">
+
+            <small>
+                مجموع کلیک
+            </small>
+
+            <strong id="کلیک‌ها">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="کارت">
+
+            <small>
+                کمبو
+            </small>
+
+            <strong>
+
+                🔥
+                <span id="کمبو">
+                    0
+                </span>
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         دکمه‌ها
+    ========================== -->
+
+    <div class="دکمه‌ها">
+
+        <button
+            class="دکمه"
+            onclick="جایزه_روزانه()">
+
+            🎁 جایزه روزانه
+
+        </button>
+
+
+        <button
+            class="دکمه"
+            onclick="ذخیره_دستی()">
+
+            💾 ذخیره بازی
+
+        </button>
+
+
+        <button
+            class="دکمه"
+            onclick="صدای_بازی = !صدای_بازی">
+
+            🔊 صدا
+
+        </button>
+
+
+        <button
+            class="دکمه"
+            onclick="ریست_بازی()">
+
+            🔄 ریست بازی
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         فروشگاه
+    ========================== -->
+
+    <div class="پنل">
+
+        <h3>
+            🛒 فروشگاه
+        </h3>
+
+
+        <div class="ارتقا">
+
+            <div class="ارتقا-info">
+
+                <b>
+                    👆 قدرت کلیک
+                </b>
+
+                <br>
+
+                <small>
+
+                    قدرت فعلی:
+                    <span id="فروشگاه-قدرت">
+                        1
+                    </span>
+
+                </small>
+
+                <br>
+
+                <small>
+
+                    قیمت:
+                    <span id="قیمت-قدرت">
+                        100
+                    </span>
+                    🪙
+
+                </small>
+
+            </div>
+
+
+            <button
+                class="خرید"
+                id="خرید-قدرت"
+                onclick="خرید_قدرت()">
+
+                خرید
+
+            </button>
+
+        </div>
+
+
+        <div class="ارتقا">
+
+            <div class="ارتقا-info">
+
+                <b>
+                    ⚡ ظرفیت انرژی
+                </b>
+
+                <br>
+
+                <small>
+
+                    ظرفیت:
+                    <span id="فروشگاه-انرژی">
+                        1000
+                    </span>
+
+                </small>
+
+                <br>
+
+                <small>
+
+                    قیمت:
+                    <span id="قیمت-انرژی">
+                        250
+                    </span>
+                    🪙
+
+                </small>
+
+            </div>
+
+
+            <button
+                class="خرید"
+                id="خرید-انرژی"
+                onclick="خرید_انرژی()">
+
+                خرید
+
+            </button>
+
+        </div>
+
+
+        <div class="ارتقا">
+
+            <div class="ارتقا-info">
+
+                <b>
+                    💰 درآمد خودکار
+                </b>
+
+                <br>
+
+                <small>
+
+                    درآمد:
+                    <span id="فروشگاه-درآمد">
+                        0
+                    </span>
+                    /ثانیه
+
+                </small>
+
+                <br>
+
+                <small>
+
+                    قیمت:
+                    <span id="قیمت-درآمد">
+                        500
+                    </span>
+                    🪙
+
+                </small>
+
+            </div>
+
+
+            <button
+                class="خرید"
+                id="خرید-درآمد"
+                onclick="خرید_درآمد()">
+
+                خرید
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         مأموریت‌ها
+    ========================== -->
+
+    <div class="پنل">
+
+        <h3>
+            🎯 مأموریت‌ها
+        </h3>
+
+
+        <div class="ماموریت">
+
+            <div class="ماموریت-بالا">
+
+                <b>
+                    اولین کلیک
+                </b>
+
+                <span>
+                    🪙 100
+                </span>
+
+            </div>
+
+            <small>
+                1 بار روی سیبیلستر کلیک کن
+            </small>
+
+            <button
+                id="ماموریت-اول"
+                onclick="گرفتن_ماموریت(1)">
+
+                دریافت جایزه
+
+            </button>
+
+        </div>
+
+
+        <div class="ماموریت">
+
+            <div class="ماموریت-بالا">
+
+                <b>
+                    کلیک‌کننده حرفه‌ای
+                </b>
+
+                <span>
+                    🪙 1000
+                </span>
+
+            </div>
+
+            <small>
+                100 بار کلیک کن
+            </small>
+
+            <button
+                id="ماموریت-دوم"
+                onclick="گرفتن_ماموریت(2)">
+
+                دریافت جایزه
+
+            </button>
+
+        </div>
+
+
+        <div class="ماموریت">
+
+            <div class="ماموریت-بالا">
+
+                <b>
+                    میلیاردر آینده
+                </b>
+
+                <span>
+                    🪙 5000
+                </span>
+
+            </div>
+
+            <small>
+                به 10000 سکه برس
+            </small>
+
+            <button
+                id="ماموریت-سوم"
+                onclick="گرفتن_ماموریت(3)">
+
+                دریافت جایزه
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="فوتر">
+
+        سیبیلستر © 2026
+
+    </div>
+
+
+</div>
+
+
+<div
+    class="اعلان"
+    id="اعلان">
+
+    آماده!
 
 </div>
 
 
 <script>
 
-    /* =========================
-       اطلاعات بازی
-    ========================= */
+/* =====================================================
+   اطلاعات بازی
+===================================================== */
 
-    let سکه =
-        Number(localStorage.getItem("سکه")) || 0;
+let بازی =
+JSON.parse(
+    localStorage.getItem("سیبیلستر_بازی")
+) || {
 
-    let انرژی =
-        Number(localStorage.getItem("انرژی"));
+    سکه: 0,
 
-    if (isNaN(انرژی)) {
-        انرژی = 100;
+    انرژی: 1000,
+
+    حداکثر_انرژی: 1000,
+
+    قدرت: 1,
+
+    درآمد: 0,
+
+    کلیک‌ها: 0,
+
+    سطح: 1,
+
+    xp: 0,
+
+    کمبو: 0,
+
+    آخرین_کلیک: 0,
+
+    جایزه_روزانه: "",
+
+    ماموریت‌ها: {
+
+        اول: false,
+
+        دوم: false,
+
+        سوم: false
+
     }
 
-
-    const حداکثر_انرژی = 100;
-
-
-    /* =========================
-       نمایش اطلاعات
-    ========================= */
-
-    function نمایش() {
-
-        document.getElementById("سکه")
-            .textContent =
-            سکه.toLocaleString("fa-IR");
+};
 
 
-        document.getElementById("انرژی-عدد")
-            .textContent =
-            انرژی;
+let صدای_بازی = true;
 
 
-        document.getElementById("نوار")
-            .style.width =
-            انرژی + "%";
-    }
+/* =====================================================
+   ذخیره
+===================================================== */
+
+function ذخیره() {
+
+    localStorage.setItem(
+        "سیبیلستر_بازی",
+        JSON.stringify(بازی)
+    );
+
+}
 
 
-    /* =========================
-       ذخیره بازی
-    ========================= */
+/* =====================================================
+   اعلان
+===================================================== */
 
-    function ذخیره() {
+function اعلان(متن) {
 
-        localStorage.setItem(
-            "سکه",
-            سکه
+    const عنصر =
+        document.getElementById("اعلان");
+
+    عنصر.textContent = متن;
+
+    عنصر.classList.add("نمایش");
+
+    setTimeout(function() {
+
+        عنصر.classList.remove("نمایش");
+
+    }, 1800);
+
+}
+
+
+/* =====================================================
+   صدای کلیک
+===================================================== */
+
+function صدا(فرکانس = 400) {
+
+    if (!صدای_بازی) return;
+
+    try {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        const صدا =
+            new AudioContext();
+
+        const نوسانگر =
+            صدا.createOscillator();
+
+        const حجم =
+            صدا.createGain();
+
+        نوسانگر.frequency.value =
+            فرکانس;
+
+        نوسانگر.type =
+            "sine";
+
+        حجم.gain.setValueAtTime(
+            0.08,
+            صدا.currentTime
         );
 
-        localStorage.setItem(
-            "انرژی",
-            انرژی
+        حجم.gain.exponentialRampToValueAtTime(
+            0.001,
+            صدا.currentTime + 0.1
         );
 
-    }
+        نوسانگر.connect(حجم);
+
+        حجم.connect(
+            صدا.destination
+        );
+
+        نوسانگر.start();
+
+        نوسانگر.stop(
+            صدا.currentTime + 0.1
+        );
+
+    } catch (e) {}
+
+}
+
+
+/* =====================================================
+   نمایش
+===================================================== */
+
+function نمایش() {
+
+    document.getElementById("سکه")
+        .textContent =
+        Math.floor(بازی.سکه).toLocaleString("fa-IR");
+
+
+    document.getElementById("انرژی")
+        .textContent =
+        Math.floor(بازی.انرژی).toLocaleString("fa-IR");
+
+
+    document.getElementById("حداکثر-انرژی")
+        .textContent =
+        بازی.حداکثر_انرژی.toLocaleString("fa-IR");
+
+
+    document.getElementById("قدرت")
+        .textContent =
+        بازی.قدرت.toLocaleString("fa-IR");
+
+
+document.getElementById("درآمد")
+        .textContent =
+        بازی.درآمد.toLocaleString("fa-IR");
+
+
+    document.getElementById("کلیک‌ها")
+        .textContent =
+        بازی.کلیک‌ها.toLocaleString("fa-IR");
+
+
+    document.getElementById("کمبو")
+        .textContent =
+        بازی.کمبو.toLocaleString("fa-IR");
+
+
+    document.getElementById("سطح")
+        .textContent =
+        بازی.سطح;
 
 
     /* =========================
-       کلیک روی سیبیلستر
-    ========================= */
+       نوار انرژی
+    ========================== */
 
-    document
-        .getElementById("سیبیلستر")
-        .addEventListener("click", function(event) {
+    let درصد_انرژی =
+        (بازی.انرژی / بازی.حداکثر_انرژی) * 100;
 
-            /* اگر انرژی تمام شده باشد */
+    document.getElementById("نوار-انرژی")
+        .style.width =
+        درصد_انرژی + "%";
 
-            if (انرژی <= 0) {
+
+    /* =========================
+       XP
+    ========================== */
+
+    let xp_لازم =
+        بازی.سطح * 100;
+
+    document.getElementById("xp-text")
+        .textContent =
+        بازی.xp + " / " + xp_لازم;
+
+    document.getElementById("xp")
+        .style.width =
+        Math.min(
+            100,
+            (بازی.xp / xp_لازم) * 100
+        ) + "%";
+
+
+    /* =========================
+       اطلاعات فروشگاه
+    ========================== */
+
+    document.getElementById("فروشگاه-قدرت")
+        .textContent =
+        بازی.قدرت;
+
+    document.getElementById("فروشگاه-انرژی")
+        .textContent =
+        بازی.حداکثر_انرژی;
+
+    document.getElementById("فروشگاه-درآمد")
+        .textContent =
+        بازی.درآمد;
+
+
+    /* =========================
+       محاسبه قیمت‌ها
+    ========================== */
+
+    let قیمت_قدرت =
+        Math.floor(
+            100 *
+            Math.pow(
+                1.55,
+                بازی.قدرت - 1
+            )
+        );
+
+
+    let قیمت_انرژی =
+        Math.floor(
+            250 *
+            Math.pow(
+                1.6,
+                (بازی.حداکثر_انرژی - 1000) / 250
+            )
+        );
+
+
+    let قیمت_درآمد =
+        Math.floor(
+            500 *
+            Math.pow(
+                1.7,
+                بازی.درآمد
+            )
+        );
+
+
+    document.getElementById("قیمت-قدرت")
+        .textContent =
+        قیمت_قدرت.toLocaleString("fa-IR");
+
+
+    document.getElementById("قیمت-انرژی")
+        .textContent =
+        قیمت_انرژی.toLocaleString("fa-IR");
+
+
+    document.getElementById("قیمت-درآمد")
+        .textContent =
+        قیمت_درآمد.toLocaleString("fa-IR");
+
+
+    /* =========================
+       فعال / غیرفعال کردن خرید
+    ========================== */
+
+    document.getElementById("خرید-قدرت")
+        .disabled =
+        بازی.سکه < قیمت_قدرت;
+
+
+    document.getElementById("خرید-انرژی")
+        .disabled =
+        بازی.سکه < قیمت_انرژی;
+
+
+    document.getElementById("خرید-درآمد")
+        .disabled =
+        بازی.سکه < قیمت_درآمد;
+
+
+    /* =========================
+       مأموریت‌ها
+    ========================== */
+
+    document.getElementById("ماموریت-اول")
+        .disabled =
+        بازی.کلیک‌ها < 1 ||
+        بازی.ماموریت‌ها.اول;
+
+
+    document.getElementById("ماموریت-دوم")
+        .disabled =
+        بازی.کلیک‌ها < 100 ||
+        بازی.ماموریت‌ها.دوم;
+
+
+    document.getElementById("ماموریت-سوم")
+        .disabled =
+        بازی.سکه < 10000 ||
+        بازی.ماموریت‌ها.سوم;
+
+}
+
+
+/* =====================================================
+   کلیک روی سیبیلستر
+===================================================== */
+
+document
+    .getElementById("سیبیلستر")
+    .addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+
+            /* انرژی کافی نیست */
+
+            if (بازی.انرژی < 1) {
+
+                اعلان(
+                    "⚡ انرژی کافی نداری!"
+                );
 
                 return;
+            }
+
+
+            /* =========================
+               کمبو
+            ========================== */
+
+            let زمان =
+                Date.now();
+
+
+            if (
+                زمان -
+                بازی.آخرین_کلیک
+                < 1000
+            ) {
+
+                بازی.کمبو++;
+
+            } else {
+
+                بازی.کمبو = 1;
 
             }
 
 
-            /* یک سکه */
+            بازی.آخرین_کلیک =
+                زمان;
 
-            سکه += 1;
+
+            /* =========================
+               قدرت پایه
+            ========================== */
+
+            let مقدار =
+                بازی.قدرت;
+
+
+            /* =========================
+               کمبو ×2
+            ========================== */
+
+            if (بازی.کمبو >= 10) {
+
+                مقدار *= 2;
+
+            }
+
+
+            /* =========================
+               ضربه کریتیکال
+            ========================== */
+
+            let کریتیکال =
+                Math.random() < 0.05;
+
+
+            if (کریتیکال) {
+
+                مقدار *= 5;
+
+                اعلان(
+                    "💥 ضربه کریتیکال!"
+                );
+
+                صدا(800);
+
+            } else {
+
+                صدا(400);
+
+            }
+
+
+            /* =========================
+               اضافه شدن سکه
+            ========================== */
+
+            بازی.سکه += مقدار;
 
 
             /* مصرف انرژی */
 
-            انرژی -= 1;
+            بازی.انرژی -= 1;
+
+
+            /* تعداد کلیک */
+
+            بازی.کلیک‌ها++;
+
+
+            /* XP */
+
+            بازی.xp += مقدار;
+
+
+            /* بررسی لول */
+
+            بررسی_سطح();
 
 
             /* نمایش سکه شناور */
 
             سکه_شناور(
                 event.clientX,
-                event.clientY
+                event.clientY,
+                مقدار,
+                کریتیکال
             );
 
 
@@ -322,59 +1756,288 @@
 
             ذخیره();
 
-        });
+        }
+    );
 
 
-    /* =========================
-       سکه شناور
-    ========================= */
+/* =====================================================
+   سکه شناور
+===================================================== */
 
-    function سکه_شناور(x, y) {
+function سکه_شناور(
+    x,
+    y,
+    مقدار,
+    کریتیکال
+) {
 
-        const نوشته =
-            document.createElement("div");
-
-
-        نوشته.className =
-            "سکه-شناور";
-
-
-        نوشته.textContent =
-            "+۱ 🪙";
+    const عنصر =
+        document.createElement("div");
 
 
-        نوشته.style.left =
-            x + "px";
+    عنصر.className =
+        "سکه-شناور";
 
 
-        نوشته.style.top =
-            y + "px";
+    عنصر.textContent =
+        (کریتیکال ? "💥 " : "+")
+        + مقدار
+        + " 🪙";
 
 
-        document.body.appendChild(
-            نوشته
+    عنصر.style.left =
+        x + "px";
+
+
+    عنصر.style.top =
+        y + "px";
+
+
+    document.body.appendChild(
+        عنصر
+    );
+
+
+    setTimeout(
+        function() {
+
+            عنصر.remove();
+
+        },
+        750
+    );
+
+}
+
+
+/* =====================================================
+   بررسی سطح
+===================================================== */
+
+function بررسی_سطح() {
+
+    let xp_لازم =
+        بازی.سطح * 100;
+
+
+    while (
+        بازی.xp >= xp_لازم
+    ) {
+
+        بازی.xp -= xp_لازم;
+
+        بازی.سطح++;
+
+        بازی.حداکثر_انرژی += 100;
+
+        بازی.انرژی =
+            بازی.حداکثر_انرژی;
+
+
+        اعلان(
+            "🎉 به سطح "
+            + بازی.سطح
+            + " رسیدی!"
         );
 
 
-        setTimeout(function() {
+        xp_لازم =
+            بازی.سطح * 100;
+    }
 
-            نوشته.remove();
+}
 
-        }, 800);
 
+/* =====================================================
+   خرید قدرت کلیک
+===================================================== */
+
+function خرید_قدرت() {
+
+    let قیمت =
+        Math.floor(
+            100 *
+            Math.pow(
+                1.55,
+                بازی.قدرت - 1
+            )
+        );
+
+
+    if (بازی.سکه < قیمت) {
+
+        اعلان(
+            "🪙 سکه کافی نداری!"
+        );
+
+        return;
     }
 
 
-    /* =========================
-       بازیابی انرژی
-       هر ثانیه 1 انرژی
-    ========================= */
+    بازی.سکه -= قیمت;
 
-    setInterval(function() {
+    بازی.قدرت++;
 
-        if (انرژی < حداکثر_انرژی) {
 
-            انرژی += 1;
+    اعلان(
+        "👆 قدرت کلیک افزایش یافت!"
+    );
+
+
+    صدا(650);
+
+    نمایش();
+
+    ذخیره();
+
+}
+
+
+/* =====================================================
+   خرید ظرفیت انرژی
+===================================================== */
+
+function خرید_انرژی() {
+
+    let قیمت =
+        Math.floor(
+            250 *
+            Math.pow(
+                1.6,
+                (بازی.حداکثر_انرژی - 1000) / 250
+            )
+        );
+
+
+    if (بازی.سکه < قیمت) {
+
+        اعلان(
+            "🪙 سکه کافی نداری!"
+        );
+
+        return;
+    }
+
+
+    بازی.سکه -= قیمت;
+
+    بازی.حداکثر_انرژی += 250;
+
+    بازی.انرژی =
+        بازی.حداکثر_انرژی;
+
+
+    اعلان(
+        "⚡ ظرفیت انرژی افزایش یافت!"
+    );
+
+
+    صدا(650);
+
+    نمایش();
+
+    ذخیره();
+
+}
+
+
+/* =====================================================
+   خرید درآمد خودکار
+===================================================== */
+
+function خرید_درآمد() {
+
+    let قیمت =
+        Math.floor(
+            500 *
+            Math.pow(
+                1.7,
+                بازی.درآمد
+            )
+        );
+
+
+    if (بازی.سکه < قیمت) {
+
+        اعلان(
+            "🪙 سکه کافی نداری!"
+        );
+
+        return;
+    }
+
+
+    بازی.سکه -= قیمت;
+
+    بازی.درآمد++;
+
+
+    اعلان(
+        "💰 درآمد خودکار افزایش یافت!"
+    );
+
+
+    صدا(650);
+
+    نمایش();
+
+    ذخیره();
+
+}
+
+
+/* =====================================================
+   شارژ انرژی
+===================================================== */
+
+setInterval(
+    function() {
+
+        if (
+            بازی.انرژی <
+            بازی.حداکثر_انرژی
+        ) {
+
+            بازی.انرژی += 3;
+
+
+            if (
+                بازی.انرژی >
+                بازی.حداکثر_انرژی
+            ) {
+
+                بازی.انرژی =
+                    بازی.حداکثر_انرژی;
+
+            }
+
+
+            نمایش();
+
+        }
+
+    },
+    1000
+);
+
+
+/* =====================================================
+   درآمد خودکار
+===================================================== */
+
+setInterval(
+    function() {
+
+        if (بازی.درآمد > 0) {
+
+            بازی.سکه +=
+                بازی.درآمد;
+
+            بازی.xp +=
+                بازی.درآمد;
+
+
+            بررسی_سطح();
 
             نمایش();
 
@@ -382,16 +2045,260 @@
 
         }
 
-    }, 1000);
+    },
+    1000
+);
 
 
-    /* =========================
-       شروع بازی
-    ========================= */
+/* =====================================================
+   کنترل کمبو
+===================================================== */
+
+setInterval(
+    function() {
+
+        if (
+            Date.now() -
+            بازی.آخرین_کلیک
+            > 1500
+        ) {
+
+            if (بازی.کمبو !== 0) {
+
+                بازی.کمبو = 0;
+
+                نمایش();
+
+            }
+
+        }
+
+    },
+    500
+);
+
+
+/* =====================================================
+   جایزه روزانه
+===================================================== */
+
+function جایزه_روزانه() {
+
+    let امروز =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+
+    if (
+        بازی.جایزه_روزانه === امروز
+    ) {
+
+        اعلان(
+            "🎁 جایزه امروز را قبلاً گرفتی!"
+        );
+
+        return;
+    }
+
+
+    بازی.جایزه_روزانه =
+        امروز;
+
+
+    let جایزه =
+        1000 +
+        (بازی.سطح * 250);
+
+
+    بازی.سکه += جایزه;
+
+
+    اعلان(
+        "🎁 "
+        + جایزه.toLocaleString("fa-IR")
+        + " سکه گرفتی!"
+    );
+
+
+    صدا(750);
 
     نمایش();
+
+    ذخیره();
+
+}
+
+
+/* =====================================================
+   دریافت مأموریت
+===================================================== */
+
+function گرفتن_ماموریت(شماره) {
+
+
+    if (شماره === 1) {
+
+        if (
+            بازی.کلیک‌ها < 1 ||
+            بازی.ماموریت‌ها.اول
+        ) {
+
+            return;
+        }
+
+
+        بازی.sکه += 100;
+
+        بازی.ماموریت‌ها.اول =
+            true;
+
+
+        اعلان(
+            "🎯 مأموریت اول کامل شد!"
+        );
+
+    }
+
+
+    if (شماره === 2) {
+
+        if (
+            بازی.کلیک‌ها < 100 ||
+            بازی.ماموریت‌ها.دوم
+        ) {
+
+            return;
+        }
+
+
+        بازی.سکه += 1000;
+
+        بازی.ماموریت‌ها.دوم =
+            true;
+
+
+        اعلان(
+            "🎯 مأموریت دوم کامل شد!"
+        );
+
+    }
+
+
+    if (شماره === 3) {
+
+        if (
+            بازی.سکه < 10000 ||
+            بازی.ماموریت‌ها.سوم
+        ) {
+
+            return;
+        }
+
+
+        بازی.سکه += 5000;
+
+        بازی.ماموریت‌ها.سوم =
+            true;
+
+
+        اعلان(
+            "🎯 مأموریت سوم کامل شد!"
+        );
+
+    }
+
+
+    صدا(850);
+
+    نمایش();
+
+    ذخیره();
+
+}
+
+
+/* =====================================================
+   ذخیره دستی
+===================================================== */
+
+function ذخیره_دستی() {
+
+    ذخیره();
+
+    اعلان(
+        "💾 بازی ذخیره شد!"
+    );
+
+}
+
+
+/* =====================================================
+   ریست بازی
+===================================================== */
+
+function ریست_بازی() {
+
+    let تایید =
+        confirm(
+            "⚠️ مطمئنی می‌خواهی کل پیشرفت بازی پاک شود؟"
+        );
+
+
+    if (!تایید) {
+
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "سیبیلستر_بازی"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   جلوگیری از انتخاب متن
+===================================================== */
+
+document.addEventListener(
+    "selectstart",
+    function(event) {
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* =====================================================
+   جلوگیری از منوی راست‌کلیک
+===================================================== */
+
+document.addEventListener(
+    "contextmenu",
+    function(event) {
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* =====================================================
+   شروع بازی
+===================================================== */
+
+نمایش();
+
+ذخیره();
 
 </script>
 
 </body>
+
 </html>
