@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEXORA Web</title>
+  <style>
+    html, body, iframe {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<iframe id="soroush" src="https://web.splus.ir"></iframe>
+
+<script>
+const replacements = [
+  [/soroush\s*\+\s*/gi, "NEXORA"],
+  [/soroush\s*plus/gi, "NEXORA"],
+  [/soroushplus/gi, "NEXORA"],
+  [/soroush/gi, "NEXORA"],
+  [/سروش\s*\+\s*/g, "NEXORA"],
+  [/سروش\s*پلاس/g, "NEXORA"],
+  [/سروش/g, "NEXORA"]
+];
+
+function replaceNames(root) {
+  const walker = document.createTreeWalker(
+    root,
+    NodeFilter.SHOW_TEXT
+  );
+
+  let node;
+  while ((node = walker.nextNode())) {
+    let text = node.nodeValue;
+    for (const [regex, replacement] of replacements) {
+      text = text.replace(regex, replacement);
+    }
+    if (text !== node.nodeValue) node.nodeValue = text;
+  }
+}
+
+document.getElementById("soroush").addEventListener("load", function () {
+  try {
+    const doc = this.contentDocument;
+    if (!doc) return;
+
+    const update = () => replaceNames(doc.body);
+    update();
+
+    new MutationObserver(update).observe(doc.body, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  } catch (error) {
+    console.warn("Cross-origin restriction:", error);
+  }
+});
+</script>
+
+</body>
+</html>
