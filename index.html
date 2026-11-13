@@ -1,54 +1,809 @@
+
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H!RAD</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050805">
+<title>H!RAD | صفحه اصلی</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            overflow: hidden;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+:root {
+    --bg: #050805;
+    --panel: #0d130e;
+    --card: #111a12;
+    --text: #ffffff;
+    --muted: #8b9a8d;
+    --accent: #39ff70;
+    --border: rgba(57,255,112,.16);
+}
 
-        .photo {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px 40px;
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background .25s, color .25s;
+}
 
-        .photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-    </style>
+body[data-theme="white"] {
+    --bg: #f2f2f2;
+    --panel: #ffffff;
+    --card: #e7e7e7;
+    --text: #171717;
+    --muted: #777777;
+    --accent: #222222;
+    --border: #dddddd;
+}
+
+body[data-theme="black"] {
+    --bg: #000000;
+    --panel: #101010;
+    --card: #191919;
+    --text: #ffffff;
+    --muted: #999999;
+    --accent: #ffffff;
+    --border: #292929;
+}
+
+body[data-theme="mono"] {
+    --bg: #080808;
+    --panel: #171717;
+    --card: #252525;
+    --text: #ffffff;
+    --muted: #aaaaaa;
+    --accent: #ffffff;
+    --border: #444444;
+}
+
+body[data-theme="blue"] {
+    --bg: #101827;
+    --panel: #1c293b;
+    --card: #26364d;
+    --text: #ffffff;
+    --muted: #a9b9ce;
+    --accent: #70b7ff;
+    --border: #344b69;
+}
+
+body[data-theme="purple"] {
+    --bg: #171020;
+    --panel: #281b35;
+    --card: #352344;
+    --text: #ffffff;
+    --muted: #c0a9d0;
+    --accent: #d6a7ff;
+    --border: #543b68;
+}
+
+body[data-theme="cream"] {
+    --bg: #eee8dc;
+    --panel: #fffaf0;
+    --card: #e9dfce;
+    --text: #44372b;
+    --muted: #86745f;
+    --accent: #98744e;
+    --border: #d7c8b3;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand img {
+    width: 68px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid var(--accent);
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: 27px;
+    color: var(--accent);
+    direction: ltr;
+}
+
+.brand p {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.online {
+    color: var(--accent);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.theme-panel {
+    margin-top: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.theme-panel label {
+    font-size: 13px;
+    color: var(--text);
+}
+
+.theme-panel select {
+    max-width: 60%;
+    padding: 10px 13px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-family: inherit;
+    outline: none;
+}
+
+.section-title {
+    margin: 30px 4px 14px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.section-title span {
+    color: var(--accent);
+}
+
+.links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    color: var(--text);
+    text-decoration: none;
+    transition: .2s;
+}
+
+.link:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    background: var(--card);
+}
+
+.link .icon {
+    display: grid;
+    place-items: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    background: var(--card);
+    color: var(--accent);
+    font-size: 21px;
+    flex-shrink: 0;
+}
+
+.link strong {
+    display: block;
+    font-size: 14px;
+}
+
+.link small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.telegram {
+    grid-column: 1 / -1;
+    border-color: var(--accent);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.info {
+    padding: 17px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    min-width: 0;
+}
+
+.info small {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.info strong {
+    display: block;
+    color: var(--accent);
+    font-size: 18px;
+    overflow-wrap: anywhere;
+}
+
+.info .sub {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.wide {
+    grid-column: 1 / -1;
+}
+
+.action {
+    display: block;
+    width: 100%;
+    margin-top: 13px;
+    padding: 13px;
+    border: 1px solid var(--accent);
+    border-radius: 13px;
+    background: var(--card);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.action:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.note {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 2;
+    margin-top: 12px;
+}
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 35px;
+}
+
+@media(max-width: 520px) {
+    header {
+        padding: 14px;
+    }
+
+    .brand img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .brand h1 {
+        font-size: 22px;
+    }
+
+    .online {
+        font-size: 10px;
+    }
+
+    .links, .info-grid {
+        gap: 9px;
+    }
+
+    .link {
+        padding: 13px 10px;
+        gap: 9px;
+    }
+
+    .link .icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .link strong {
+        font-size: 12px;
+    }
+
+    .link small {
+        font-size: 10px;
+    }
+
+    .info {
+        padding: 13px;
+    }
+
+    .info strong {
+        font-size: 15px;
+    }
+
+    .theme-panel {
+        flex-wrap: wrap;
+    }
+
+    .theme-panel select {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+</style>
 </head>
 
-<body>
+<body data-theme="neon">
 
-    <div class="photo">
+<div class="container">
+
+<header>
+    <div class="brand">
         <img
             src="https://orangpet.com/wp-content/uploads/2025/05/chihuahua-dog3.webp"
-            alt="H!RAD"
+            alt="H!RAD Dog"
         >
+        <div>
+            <h1>H!RAD</h1>
+            <p>وب‌سایت شخصی من</p>
+        </div>
     </div>
+
+    <div class="online">
+        <span class="dot"></span>
+        آنلاین
+    </div>
+</header>
+
+<!-- Theme selector -->
+<div class="theme-panel">
+    <label for="themeSelect">🎨 تم ظاهری سایت</label>
+
+    <select id="themeSelect" onchange="changeTheme(this.value)">
+        <option value="neon">مشکی سبز نئونی</option>
+        <option value="white">سفید</option>
+        <option value="black">مشکی</option>
+        <option value="mono">مشکی سفید</option>
+        <option value="blue">آبی روزمره</option>
+        <option value="purple">بنفش</option>
+        <option value="cream">کرم</option>
+    </select>
+</div>
+
+<h2 class="section-title">
+    <span>01 /</span> دسترسی سریع
+</h2>
+
+<div class="links">
+
+    <a class="link telegram"
+       href="https://t.me/HlRUD"
+       target="_blank" rel="noopener">
+        <div class="icon">✈</div>
+        <div>
+            <strong>تلگرام من</strong>
+            <small>t.me/HlRUD</small>
+        </div>
+    </a>
+
+    <a class="link" href="/username.html">
+        <div class="icon">♙</div>
+        <div>
+            <strong>اکانت‌های من</strong>
+            <small>شبکه‌های اجتماعی</small>
+        </div>
+    </a>
+
+    <a class="link" href="/meme.html">
+        <div class="icon">◉</div>
+        <div>
+            <strong>صفحه میم</strong>
+            <small>Random Meme</small>
+        </div>
+    </a>
+
+    <a class="link"
+       href="https://github.com/HlRUD/HlRUD.github.io/tree/main/self-splus"
+       target="_blank" rel="noopener">
+        <div class="icon">⌘</div>
+        <div>
+            <strong>سلف سروش</strong>
+            <small>مشاهده فایل‌های پروژه</small>
+        </div>
+    </a>
+
+    <a class="link"
+       href="https://github.com/HlRUD/HlRUD.github.io"
+       target="_blank" rel="noopener">
+        <div class="icon">⌘</div>
+        <div>
+            <strong>گیت‌هاب</strong>
+            <small>مخزن اصلی پروژه</small>
+        </div>
+    </a>
+
+</div>
+
+<h2 class="section-title">
+    <span>02 /</span> اطلاعات زنده
+</h2>
+
+<div class="info-grid">
+
+    <div class="info">
+        <small>ساعت محلی</small>
+        <strong id="clock">--:--:--</strong>
+        <div class="sub" id="date">در حال دریافت تاریخ...</div>
+    </div>
+
+    <div class="info">
+        <small>شهر شما</small>
+        <strong id="city">نامشخص</strong>
+        <div class="sub" id="country">موقعیت هنوز دریافت نشده</div>
+    </div>
+
+    <div class="info">
+        <small>وضعیت آب‌وهوا</small>
+        <strong id="weather">نامشخص</strong>
+        <div class="sub" id="temperature">دمای هوا: --</div>
+    </div>
+
+    <div class="info">
+        <small>رطوبت هوا</small>
+        <strong id="humidity">--</strong>
+        <div class="sub" id="wind">سرعت باد: --</div>
+    </div>
+
+    <div class="info wide">
+        <small>IP عمومی شما</small>
+        <strong id="ip" dir="ltr">در حال دریافت...</strong>
+        <div class="sub">IP عمومی اتصال اینترنت شما</div>
+    </div>
+
+    <div class="info">
+        <small>مرورگر</small>
+        <strong id="browser">در حال بررسی...</strong>
+    </div>
+
+    <div class="info">
+        <small>وضعیت اینترنت</small>
+        <strong id="connection">--</strong>
+    </div>
+
+</div>
+
+<button class="action" onclick="getLocation()">
+    دریافت شهر و آب‌وهوای من
+</button>
+
+<p class="note">
+    برای نمایش شهر و آب‌وهوا باید اجازه دسترسی به موقعیت مکانی مرورگر را بدهید.
+    موقعیت مکانی برای دریافت نام شهر و اطلاعات آب‌وهوا استفاده می‌شود.
+    IP عمومی نیز از طریق یک سرویس خارجی دریافت می‌شود.
+</p>
+
+<footer>
+    H!RAD © 2026 — All rights reserved
+</footer>
+
+</div>
+
+<script>
+
+// -------------------------
+// Theme system
+// -------------------------
+
+const themes = [
+    "neon", "white", "black",
+    "mono", "blue", "purple", "cream"
+];
+
+function changeTheme(theme) {
+    if (!themes.includes(theme)) return;
+
+    document.body.dataset.theme = theme;
+
+    localStorage.setItem("hirud-theme", theme);
+
+    document.getElementById("themeSelect").value = theme;
+}
+
+function loadSavedTheme() {
+    let saved = localStorage.getItem("hirud-theme");
+
+    if (!themes.includes(saved)) {
+        saved = "neon";
+    }
+
+    changeTheme(saved);
+}
+
+loadSavedTheme();
+
+
+// -------------------------
+// Live clock and date
+// -------------------------
+
+function updateClock() {
+    const now = new Date();
+
+    document.getElementById("clock").textContent =
+        now.toLocaleTimeString("fa-IR", {
+            hour12: false
+        });
+
+    document.getElementById("date").textContent =
+        now.toLocaleDateString("fa-IR", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+
+// -------------------------
+// Public IP
+// -------------------------
+
+async function getIP() {
+    try {
+        const response = await fetch(
+            "https://api.ipify.org?format=json"
+        );
+
+        if (!response.ok) throw new Error("IP error");
+
+        const data = await response.json();
+
+        document.getElementById("ip").textContent = data.ip;
+
+    } catch {
+        document.getElementById("ip").textContent = "دریافت نشد";
+    }
+}
+
+getIP();
+
+
+// -------------------------
+// Browser detection
+// -------------------------
+
+function detectBrowser() {
+    const ua = navigator.userAgent;
+
+    let name = "مرورگر ناشناس";
+
+    if (ua.includes("Edg/")) name = "Microsoft Edge";
+    else if (ua.includes("Firefox/")) name = "Firefox";
+    else if (ua.includes("Chrome/")) name = "Chrome";
+    else if (ua.includes("Safari/")) name = "Safari";
+
+    document.getElementById("browser").textContent = name;
+}
+
+detectBrowser();
+
+
+// -------------------------
+// Internet status
+// -------------------------
+
+function updateConnection() {
+    document.getElementById("connection").textContent =
+        navigator.onLine ? "متصل" : "قطع";
+}
+
+updateConnection();
+
+window.addEventListener("online", updateConnection);
+window.addEventListener("offline", updateConnection);
+
+
+// -------------------------
+// Weather descriptions
+// -------------------------
+
+function weatherDescription(code) {
+    if (code === 0) return "صاف";
+    if ([1, 2].includes(code)) return "نیمه‌ابری";
+    if (code === 3) return "ابری";
+    if ([45, 48].includes(code)) return "مه‌آلود";
+
+    if ([51, 53, 55, 56, 57].includes(code))
+        return "نم‌نم باران";
+
+    if ([61, 63, 65, 66, 67].includes(code))
+        return "بارانی";
+
+    if ([71, 73, 75, 77].includes(code))
+        return "برفی";
+
+    if ([80, 81, 82].includes(code))
+        return "رگبار باران";
+
+    if ([85, 86].includes(code))
+        return "رگبار برف";
+
+    if ([95, 96, 99].includes(code))
+        return "طوفان تندری";
+
+    return "نامشخص";
+}
+
+
+// -------------------------
+// Get location and weather
+// -------------------------
+
+function getLocation() {
+    if (!navigator.geolocation) {
+        alert("مرورگر شما از موقعیت مکانی پشتیبانی نمی‌کند.");
+        return;
+    }
+
+    const cityElement = document.getElementById("city");
+
+    cityElement.textContent = "در حال دریافت...";
+
+    navigator.geolocation.getCurrentPosition(
+        async function(position) {
+
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            await getCity(lat, lon);
+            await getWeather(lat, lon);
+
+        },
+
+        function(error) {
+            cityElement.textContent = "دسترسی داده نشد";
+
+            document.getElementById("country").textContent =
+                "اجازه موقعیت مکانی را بررسی کنید.";
+        },
+
+        {
+            enableHighAccuracy: false,
+            timeout: 15000,
+            maximumAge: 300000
+        }
+    );
+}
+
+
+// -------------------------
+// Reverse geocoding
+// -------------------------
+
+async function getCity(lat, lon) {
+    try {
+        const response = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=fa`
+        );
+
+        if (!response.ok) throw new Error("Location error");
+
+        const data = await response.json();
+
+        const city =
+            data.city ||
+            data.locality ||
+            data.principalSubdivision ||
+            "نامشخص";
+
+        const country = data.countryName || "نامشخص";
+
+        document.getElementById("city").textContent = city;
+
+        document.getElementById("country").textContent =
+            country;
+
+    } catch {
+        document.getElementById("city").textContent =
+            "نامشخص";
+
+        document.getElementById("country").textContent =
+            "خطا در دریافت نام شهر";
+    }
+}
+
+
+// -------------------------
+// Open-Meteo weather API
+// -------------------------
+
+async function getWeather(lat, lon) {
+    try {
+        const url =
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=auto`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) throw new Error("Weather error");
+
+        const data = await response.json();
+
+        const current = data.current;
+
+        document.getElementById("weather").textContent =
+            weatherDescription(current.weather_code);
+
+        document.getElementById("temperature").textContent =
+            `دمای هوا: ${current.temperature_2m}°C`;
+
+        document.getElementById("humidity").textContent =
+            `${current.relative_humidity_2m}%`;
+
+        document.getElementById("wind").textContent =
+            `سرعت باد: ${current.wind_speed_10m} km/h`;
+
+    } catch {
+        document.getElementById("weather").textContent =
+            "دریافت نشد";
+
+        document.getElementById("temperature").textContent =
+            "خطا در دریافت آب‌وهوا";
+
+        document.getElementById("humidity").textContent = "--";
+
+        document.getElementById("wind").textContent = "--";
+    }
+}
+
+</script>
 
 </body>
 </html>
