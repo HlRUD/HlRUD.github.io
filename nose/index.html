@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کوروش ضیایی | کوروش دماغ 🎭</title>
+<meta name="description" content="سایت رسمی کوروش ضیایی، بازیگر معروف به کوروش دماغ. تماشای آثار، خرید بلیط و گالری تصاویر.">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Vazirmatn', sans-serif;
+    background:#0d0d12;
+    color:#fff;
+    line-height:1.8;
+    overflow-x:hidden;
+  }
+  a { text-decoration:none; color:inherit; }
+
+  /* هدر */
+  header {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(13,13,18,0.85);
+    backdrop-filter:blur(12px);
+    padding:15px 5%;
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:1px solid rgba(255,215,0,0.15);
+    flex-wrap:wrap; gap:10px;
+  }
+  .logo { font-weight:900; font-size:1.3rem; color:#ffd700; }
+  .logo span { color:#ff4d6d; }
+  nav { display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
+  nav a { margin:0 10px; font-size:.95rem; transition:.3s; }
+  nav a:hover { color:#ffd700; }
+  .home-link {
+    background:linear-gradient(135deg,#ffd700,#ff9500);
+    color:#000 !important;
+    font-weight:700;
+    padding:7px 16px;
+    border-radius:50px;
+    font-size:.85rem !important;
+  }
+  .home-link:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(255,215,0,0.4); }
+
+  /* Hero */
+  .hero {
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:120px 20px 60px;
+    background:radial-gradient(circle at 50% 30%, #1f1f2e 0%, #0d0d12 70%);
+    position:relative;
+  }
+  .hero::before {
+    content:"👃";
+    position:absolute; font-size:22rem; opacity:.04;
+    top:50%; left:50%; transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .hero h1 {
+    font-size:clamp(2.2rem, 6vw, 4.5rem);
+    font-weight:900;
+    background:linear-gradient(90deg,#ffd700,#ff4d6d,#ffd700);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shine 4s linear infinite;
+    background-size:200% auto;
+  }
+  @keyframes shine { to { background-position:200% center; } }
+  .hero .nick {
+    font-size:clamp(1.1rem,3vw,1.6rem);
+    color:#ff4d6d; margin-top:10px; font-weight:700;
+    letter-spacing:1px;
+  }
+  .hero p.sub { margin-top:18px; color:#aaa; max-width:600px; font-size:1.05rem; }
+  .btns { margin-top:35px; display:flex; gap:15px; flex-wrap:wrap; justify-content:center; }
+  .btn {
+    padding:14px 30px; border-radius:50px; font-weight:700; font-size:1rem;
+    transition:.3s; display:inline-flex; align-items:center; gap:8px;
+    border:2px solid transparent;
+  }
+  .btn-gold {
+    background:linear-gradient(135deg,#ffd700,#ff9500); color:#000;
+    box-shadow:0 8px 25px rgba(255,215,0,0.35);
+  }
+  .btn-gold:hover { transform:translateY(-3px); box-shadow:0 12px 35px rgba(255,215,0,0.5); }
+  .btn-outline { border-color:#ff4d6d; color:#ff4d6d; }
+  .btn-outline:hover { background:#ff4d6d; color:#fff; transform:translateY(-3px); }
+
+  /* بخش‌ها */
+  section { padding:90px 5%; max-width:1100px; margin:0 auto; }
+  .section-title {
+    font-size:clamp(1.6rem,4vw,2.4rem); font-weight:900; text-align:center;
+    margin-bottom:15px;
+  }
+  .section-title span { color:#ffd700; }
+  .section-sub { text-align:center; color:#888; margin-bottom:50px; }
+
+  /* درباره */
+  .about-box {
+    background:linear-gradient(145deg,#16161f,#1c1c28);
+    border-radius:24px; padding:40px;
+    border:1px solid rgba(255,215,0,0.1);
+    font-size:1.1rem; color:#ccc;
+    text-align:right;
+  }
+  .about-head {
+    text-align:center;
+    margin-bottom:25px;
+    padding-bottom:20px;
+    border-bottom:1px solid rgba(255,215,0,0.15);
+  }
+  .about-head h3 {
+    font-size:1.8rem;
+    font-weight:900;
+    background:linear-gradient(90deg,#ffd700,#ff4d6d);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .about-head .meta { color:#999; font-size:.95rem; margin-top:8px; }
+  .about-text { font-size:1.08rem; color:#ccc; margin:15px 0; line-height:2; }
+  .quote {
+    background:linear-gradient(145deg,#1f1f2e,#252536);
+    border-right:4px solid #ffd700;
+    border-radius:14px;
+    padding:25px 25px 25px 20px;
+    margin:25px 0;
+    font-size:1.1rem;
+    color:#e0e0e0;
+    line-height:2;
+    position:relative;
+    font-style:italic;
+  }
+  .quote::before {
+    content:"❝";
+    position:absolute;
+    top:-15px;
+    right:20px;
+    font-size:3rem;
+    color:#ffd700;
+    font-style:normal;
+  }
+  .quote strong { color:#ffd700; }
+  .tags { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:30px; }
+  .tags span {
+    background:rgba(255,215,0,0.1);
+    border:1px solid rgba(255,215,0,0.3);
+    color:#ffd700;
+    padding:8px 16px;
+    border-radius:50px;
+    font-size:.9rem;
+    font-weight:700;
+    transition:.3s;
+  }
+  .tags span:hover { background:#ffd700; color:#000; transform:translateY(-3px); }
+
+  /* کارت‌ها */
+  .cards {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:25px;
+  }
+  .card {
+    background:linear-gradient(145deg,#16161f,#1c1c28);
+    border-radius:22px; padding:35px 25px; text-align:center;
+    border:1px solid rgba(255,255,255,0.06);
+    transition:.35s;
+  }
+  .card:hover { transform:translateY(-8px); border-color:#ffd700; box-shadow:0 15px 40px rgba(255,215,0,0.15); }
+  .card .icon { font-size:3rem; margin-bottom:15px; }
+  .card h3 { font-size:1.25rem; margin-bottom:10px; color:#ffd700; }
+  .card p { color:#999; font-size:.95rem; margin-bottom:20px; }
+
+  /* گالری پیش‌نمایش */
+  .gallery-note {
+    text-align:center; background:#16161f; border-radius:20px;
+    padding:40px; border:1px dashed #ffd70055;
+  }
+  .gallery-note .big-icon { font-size:3.5rem; }
+
+  /* فوتر */
+  footer {
+    text-align:center; padding:40px 20px; color:#666; font-size:.9rem;
+    border-top:1px solid rgba(255,255,255,0.05);
+  }
+  footer .heart { color:#ff4d6d; }
+  footer a { color:#ffd700; }
+
+  /* ریسپانسیو */
+  @media (max-width:640px){
+    nav { display:none; }
+    .btn { padding:12px 22px; font-size:.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- هدر -->
+<header>
+  <div class="logo">کوروش <span>دماغ</span></div>
+  <nav>
+    <a href="#about">درباره</a>
+    <a href="#work">بلیط‌ها</a>
+    <a href="#gallery">گالری</a>
+    <a href="#social">ارتباط</a>
+    <a class="home-link" href="../">🏠 صفحه اصلی</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>کوروش ضیایی</h1>
+  <div class="nick">👃 کوروش دماغ — دماغ متحرک 🎭</div>
+  <p class="sub">
+    بازیگر، هنرمند و صاحب مشهورترین دماغ صحنه!
+    اینجا خانهٔ رسمی کوروش است؛ از نمایش‌ها و بلیط‌ها تا گالری خاطرات.
+  </p>
+  <div class="btns">
+    <a class="btn btn-gold" href="https://instagram.com/koorosh.artist" target="_blank">📸 اینستاگرام</a>
+    <a class="btn btn-outline" href="https://belitbox.com/artist/%DA%A9%D9%88%D8%B1%D9%88%D8%B4-%D8%B6%DB%8C%D8%A7%DB%8C%DB%8C" target="_blank">🎟️ خرید بلیط</a>
+  </div>
+</section>
+
+<!-- درباره -->
+<section id="about">
+  <h2 class="section-title">درباره <span>کوروش</span></h2>
+  <p class="section-sub">داستان پسری که دماغش از خودش معروف‌تر شد! 👃</p>
+
+  <div class="about-box">
+    <div class="about-head">
+      <h3>کوروش ضیایی</h3>
+      <p class="meta">🎂 متولد اردیبهشت ۱۳۹۲ &nbsp;|&nbsp; 🎬 بازیگر موفق سینمای ایران</p>
+    </div>
+
+    <p class="about-text">کوروش از همون بچگی یه مسیر سخت رو طی کرد. خودش می‌گه:</p>
+
+    <blockquote class="quote">
+      «من سختی زیادی کشیدم. از بچگیم سنگین بودم، قدم بلند بود...
+      ولی بخاطر دماغ گنده و کلفتم دخترا ازم خوششون نمی‌ومد.
+      دماغم <strong>۱۰۰۰ برابر وزن خودم</strong> بود، انقدر سنگین که
+      تعادلم رو بهم می‌زد و با دماغ میوفتادم زمین!» 👃💥
+    </blockquote>
+
+    <p class="about-text">
+      ولی کوروش تسلیم نشد. اون دماغی که یه روز باعث زمین خوردنش می‌شد،
+      امروز <strong>امضای هنری</strong> و <strong>برند شخصی</strong>ش شده.
+      کوروش دماغ حالا روی صحنه می‌درخشه، می‌خندونه، و ثابت کرده که
+      بزرگ‌ترین نقطه‌ضعف آدم می‌تونه بزرگ‌ترین نقطه‌قوتش بشه. ✨
+    </p>
+
+    <div class="tags">
+      <span>🎭 بازیگر</span>
+      <span>👃 دماغ متحرک</span>
+      <span>✨ دماغ ضیایی</span>
+      <span>💪 از زمین‌خوردن تا درخشیدن</span>
+    </div>
+  </div>
+</section>
+
+<!-- بلیط‌ها -->
+<section id="work">
+  <h2 class="section-title">نمایش‌ها و <span>بلیط‌ها</span></h2>
+  <p class="section-sub">برای دیدن کوروش روی صحنه، بلیطت رو همین‌جا بگیر</p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🎟️</div>
+      <h3>بلیط باکس</h3>
+      <p>تماشای آثار و اجراهای کوروش ضیایی در بلیط باکس</p>
+      <a class="btn btn-gold" href="https://belitbox.com/artist/%DA%A9%D9%88%D8%B1%D9%88%D8%B4-%D8%B6%DB%8C%D8%A7%DB%8C%DB%8C" target="_blank">خرید بلیط</a>
+    </div>
+    <div class="card">
+      <div class="icon">📸</div>
+      <h3>اینستاگرام</h3>
+      <p>پشت صحنه، خبرها و لحظه‌های بامزهٔ کوروش</p>
+      <a class="btn btn-outline" href="https://instagram.com/koorosh.artist" target="_blank">@koorosh.artist</a>
+    </div>
+  </div>
+</section>
+
+<!-- گالری -->
+<section id="gallery">
+  <h2 class="section-title">گالری <span>تصاویر</span></h2>
+  <p class="section-sub">آرشیو عکس‌های کوروش دماغ</p>
+  <div class="gallery-note">
+    <div class="big-icon">🖼️👃</div>
+    <p style="margin-top:15px; color:#ccc; font-size:1.05rem;">
+      همهٔ عکس‌های کوروش در آرشیو رسمی ما جمع شده‌اند.
+    </p>
+    <!-- لینک نسبی به gallery.html داخل همون پوشه -->
+    <a class="btn btn-gold" style="margin-top:20px;" href="gallery.html">مشاهده آرشیو تصاویر</a>
+  </div>
+</section>
+
+<!-- ارتباط -->
+<section id="social">
+  <h2 class="section-title">با کوروش در <span>ارتباط</span> باش</h2>
+  <p class="section-sub">ما را در شبکه‌های اجتماعی دنبال کنید</p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">📷</div>
+      <h3>اینستاگرام</h3>
+      <p>@koorosh.artist</p>
+      <a class="btn btn-outline" href="https://instagram.com/koorosh.artist" target="_blank">دنبال کردن</a>
+    </div>
+    <div class="card">
+      <div class="icon">🎫</div>
+      <h3>بلیط باکس</h3>
+      <p>صفحهٔ هنرمند در بلیط باکس</p>
+      <a class="btn btn-outline" href="https://belitbox.com/artist/%DA%A9%D9%88%D8%B1%D9%88%D8%B4-%D8%B6%DB%8C%D8%A7%DB%8C%DB%8C" target="_blank">مشاهده</a>
+    </div>
+    <div class="card">
+      <div class="icon">🖼️</div>
+      <h3>آرشیو عکس</h3>
+      <p>گالری کامل تصاویر</p>
+      <a class="btn btn-outline" href="gallery.html">ورود</a>
+    </div>
+  </div>
+</section>
+
+<!-- فوتر -->
+<footer>
+  ساخته شده با <span class="heart">❤️</span> برای کوروش دماغ —
+  <a href="../">بازگشت به صفحه اصلی سایت</a> © ۱۴۰۴
+</footer>
+
+<script>
+  document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+  </html>
