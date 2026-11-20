@@ -2,12 +2,12 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>گالری تصاویر کوروش دماغ 👃</title>
 <meta name="description" content="آرشیو تصاویر کوروش ضیایی - کوروش دماغ">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 
   body {
     font-family:'Vazirmatn', sans-serif;
@@ -15,6 +15,7 @@
     color:#fff;
     min-height:100vh;
     line-height:1.8;
+    overflow-x:hidden;
   }
 
   a { text-decoration:none; color:inherit; }
@@ -52,9 +53,6 @@
     transform:translateY(-3px);
     box-shadow:0 12px 35px rgba(255,215,0,0.55);
   }
-  .back-btn:active { transform:translateY(0); }
-
-  /* دکمه دوم با استایل متفاوت */
   .back-btn.outline {
     background:transparent;
     border:2px solid #ff4d6d;
@@ -68,10 +66,7 @@
   }
 
   /* عنوان */
-  .page-title {
-    text-align:center;
-    padding:35px 20px 10px;
-  }
+  .page-title { text-align:center; padding:35px 20px 10px; }
   .page-title h1 {
     font-size:clamp(1.6rem,5vw,2.6rem);
     font-weight:900;
@@ -83,7 +78,6 @@
     animation:shine 4s linear infinite;
   }
   @keyframes shine { to { background-position:200% center; } }
-
   .page-title p { color:#888; font-size:.95rem; margin-top:8px; }
 
   /* گالری */
@@ -105,6 +99,8 @@
     box-shadow:0 10px 30px rgba(0,0,0,0.4);
     transition:transform .35s ease, box-shadow .35s ease;
     position:relative;
+    cursor:zoom-in;
+    touch-action:manipulation;   /* جلوگیری از زوم ناخواسته در موبایل */
   }
 
   .photo-item:hover {
@@ -120,8 +116,7 @@
     object-fit:cover;
     user-select:none;
     -webkit-user-drag:none;
-    pointer-events:none;   /* غیرفعال کردن کلیک روی عکس */
-    cursor:default;
+    pointer-events:none;   /* عکس خودش لینک/کلیک نداره؛ کلیک روی والد شنیده میشه */
   }
 
   .photo-item .num {
@@ -138,6 +133,103 @@
     pointer-events:none;
   }
 
+  /* آیکون زوم */
+  .photo-item .zoom-icon {
+    position:absolute;
+    bottom:12px;
+    left:12px;
+    background:rgba(0,0,0,0.6);
+    color:#ffd700;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    backdrop-filter:blur(6px);
+    pointer-events:none;
+    transition:.3s;
+    opacity:.7;
+  }
+  .photo-item:hover .zoom-icon { opacity:1; transform:scale(1.1); }
+
+  /* 🌟 لایت‌باکس فول‌اسکرین */
+  .lightbox {
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:rgba(0,0,0,0.96);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  .lightbox.active { display:flex; opacity:1; }
+
+  .lightbox img {
+    max-width:95vw;
+    max-height:90vh;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    border-radius:12px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.8);
+    user-select:none;
+    -webkit-user-drag:none;
+    pointer-events:none;   /* خود عکس کلیک‌پذیر نیست */
+    animation:zoomIn .3s ease;
+  }
+  @keyframes zoomIn {
+    from { transform:scale(.85); opacity:0; }
+    to   { transform:scale(1); opacity:1; }
+  }
+
+  /* دکمه بستن */
+  .lightbox .close-btn {
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:rgba(255,215,0,0.15);
+    border:2px solid #ffd700;
+    color:#ffd700;
+    font-size:1.5rem;
+    font-weight:900;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+    font-family:'Vazirmatn', sans-serif;
+    z-index:10001;
+  }
+  .lightbox .close-btn:hover {
+    background:#ffd700;
+    color:#000;
+    transform:rotate(90deg);
+  }
+
+  /* شمارنده عکس در لایت‌باکس */
+  .lightbox .counter {
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,0.6);
+    color:#ffd700;
+    padding:8px 22px;
+    border-radius:50px;
+    font-size:.9rem;
+    font-weight:700;
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,215,0,0.3);
+  }
+
   footer {
     text-align:center;
     padding:30px 20px;
@@ -152,6 +244,8 @@
     .gallery { padding:20px 12px 50px; gap:16px; }
     .photo-item { border-radius:16px; }
     .back-btn { font-size:.9rem; padding:11px 22px; }
+    .lightbox .close-btn { top:15px; right:15px; width:44px; height:44px; font-size:1.3rem; }
+    .lightbox .counter { bottom:15px; font-size:.8rem; padding:6px 18px; }
   }
 </style>
 </head>
@@ -159,71 +253,86 @@
 
   <!-- دکمه‌های بالای صفحه -->
   <div class="top-bar">
-    <!-- لینک نسبی به index.html (سایت اصلی داخل همون پوشه nose) -->
     <a class="back-btn" href="index.html">🏠 بازگشت به سایت کوروش</a>
-    <!-- لینک به صفحه اصلی سایت (بیرون از پوشه nose) -->
     <a class="back-btn outline" href="../">🌐 صفحه اصلی سایت</a>
   </div>
 
   <!-- عنوان -->
   <div class="page-title">
     <h1>گالری کوروش دماغ 👃</h1>
-    <p>آرشیو تصاویر کوروش ضیایی — از بالا به پایین</p>
+    <p>برای مشاهده تمام‌صفحه، روی هر عکس لمس کنید 👆</p>
   </div>
 
   <!-- گالری عکس‌ها -->
-  <div class="gallery">
+  <div class="gallery" id="gallery">
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="0">
       <span class="num">۱</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/n686875_.jpg" alt="تصویر کوروش ۱" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="1">
       <span class="num">۲</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/t398423_.jpg" alt="تصویر کوروش ۲" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="2">
       <span class="num">۳</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/e57913_.jpg" alt="تصویر کوروش ۳" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="3">
       <span class="num">۴</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/a345295_.jpg" alt="تصویر کوروش ۴" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="4">
       <span class="num">۵</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/z94762_.jpg" alt="تصویر کوروش ۵" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="5">
       <span class="num">۶</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/y247458_.jpg" alt="تصویر کوروش ۶" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="6">
       <span class="num">۷</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/i984817_.jpg" alt="تصویر کوروش ۷" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="7">
       <span class="num">۸</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/o21440_.jpg" alt="تصویر کوروش ۸" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="8">
       <span class="num">۹</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/h7866_.jpg" alt="تصویر کوروش ۹" loading="lazy">
     </div>
 
-    <div class="photo-item">
+    <div class="photo-item" data-index="9">
       <span class="num">۱۰</span>
+      <span class="zoom-icon">🔍</span>
       <img src="https://cdn.imgurl.ir/uploads/z571257_.jpg" alt="تصویر کوروش ۱۰" loading="lazy">
     </div>
 
+  </div>
+
+  <!-- 🌟 لایت‌باکس فول‌اسکرین -->
+  <div class="lightbox" id="lightbox">
+    <button class="close-btn" id="closeBtn" aria-label="بستن">✕</button>
+    <img id="lightboxImg" src="" alt="نمایش تمام‌صفحه">
+    <div class="counter" id="counter">۱ / ۱۰</div>
   </div>
 
   <!-- فوتر -->
@@ -232,5 +341,99 @@
     <a href="../">بازگشت به صفحه اصلی سایت</a> © ۱۴۰۴
   </footer>
 
+<script>
+  (function() {
+    const gallery   = document.getElementById('gallery');
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lightboxImg');
+    const closeBtn  = document.getElementById('closeBtn');
+    const counter   = document.getElementById('counter');
+
+    // جمع‌آوری همه عکس‌ها
+    const items = Array.from(gallery.querySelectorAll('.photo-item'));
+    const images = items.map(item => item.querySelector('img').src);
+    const total = images.length;
+    let currentIndex = 0;
+
+    // تبدیل اعداد به فارسی
+    const toFa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+    // باز کردن لایت‌باکس
+    function openLightbox(index) {
+      currentIndex = index;
+      lbImg.src = images[currentIndex];
+      counter.textContent = toFa(currentIndex + 1) + ' / ' + toFa(total);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';  // قفل اسکرول پس‌زمینه
+    }
+
+    // بستن لایت‌باکس
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      // کمی صبر تا انیمیشن بسته شدن تموم بشه، بعد src رو خالی کن
+      setTimeout(() => { lbImg.src = ''; }, 300);
+    }
+
+    // رفتن به عکس بعدی/قبلی
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % total;
+      updateLightbox();
+    }
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + total) % total;
+      updateLightbox();
+    }
+    function updateLightbox() {
+      lbImg.src = images[currentIndex];
+      counter.textContent = toFa(currentIndex + 1) + ' / ' + toFa(total);
+      // انیمیشن کوچیک برای تغییر
+      lbImg.style.animation = 'none';
+      requestAnimationFrame(() => {
+        lbImg.style.animation = 'zoomIn .3s ease';
+      });
+    }
+
+    // کلیک روی هر عکس → باز کردن لایت‌باکس
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => openLightbox(i));
+    });
+
+    // بستن با دکمه ✕
+    closeBtn.addEventListener('click', closeLightbox);
+
+    // بستن با کلیک روی پس‌زمینه (نه روی عکس یا دکمه)
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // بستن با کلید Escape + ناوبری با کلیدهای جهت‌دار
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  nextImage();   // چپ → بعدی (RTL)
+      if (e.key === 'ArrowRight') prevImage();   // راست → قبلی (RTL)
+    });
+
+    // ناوبری با swipe در موبایل
+    let touchStartX = 0;
+    let touchEndX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) < swipeThreshold) return;
+      if (diff < 0) nextImage();   // swipe به چپ → بعدی
+      else          prevImage();   // swipe به راست → قبلی
+    }
+  })();
+</script>
 </body>
 </html>
